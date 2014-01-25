@@ -1,10 +1,10 @@
 Javascript-Examples
 ===================
 
-Mi código JS, CSS3 y HTML5.
+Mi código JS (jquery), CSS3 y HTML5.
 
 
-Algunos ejemplos de código web
+Algunos ejemplos de código web:
 
 Una tabla periodica
 

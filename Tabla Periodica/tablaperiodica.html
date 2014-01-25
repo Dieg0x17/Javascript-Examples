@@ -1,0 +1,211 @@
+<html>
+<!-- 
+Licencia: Creative Commons Atribución-NoComercial-CompartirDerivadasIgual 3.0 Unported License
+				 _____________________________________________________________________ 
+				|*********************************************************************|
+				|****************       TABLA PERIODICA DE LOS        ****************|
+				|****************              ELEMENTOS              ****************|
+				|****************                                     ****************|
+				|**************** POR: Diego Rasero de la Fuente      ****************|
+				|**************** E-mail: diegolo.r8 (at) gmail.com   ****************|
+				|*********************************************************************|
+				|_____________________________________________________________________|
+!-->
+<head>
+<title>Tabla Periodica</title>
+<script src="jquery.js"></script> <! libreria jquery>
+<style type="text/css">
+/*Estado Físico */
+.gas{color:#FFF; text-shadow: 2px 2px 2px #F00}/*Gases*/
+.sol{color:#000; text-shadow: -0.5px -0.5px 2px #0F0}/*Sólidos*/
+.liq{color:#113; text-shadow: 0 0 6px #00A, 0 0 4px #77D, 0 0 2px #AAF}/*Líquidos */
+.sin{color:#99fffe; text-shadow: 0.5px 0.5px 6px #0F0}/*Sintéticos*/
+.n{	color:#000; width: 50px; padding:0; font-size:15pt; text-align:center; border-radius: 40px;}
+.num{	font-size: 10pt;	color:#000;	 text-align:right; padding-right: 5px; text-shadow:none;}
+/*color de fondo */
+.malc{background: #ce6363;}/*Metales alcalinos*/
+.malct{background: #d3a14a;}/*Metales alcalinoterreos*/
+.etran{background: #3581f4;}/*Elementos de Tansición*/
+.om{background: #92b4e6;}/*Otros Metales*/
+.metlds{background: #b66062;}/*Metaloides*/
+.nm{background: #69b560;}/*No metales*/
+.hal{background: #c8d55d;}/*Halógenos*/
+.gn{background: #308930;}/*Gases nobles*/
+.lan{background: #9F779F;}/*lantánidos */
+.act{background: #9F559F;}/*actínidos */
+#leyenda{-webkit-border-radius: 30px;  padding:20px; margin-left: 1035px; color:#AAF; font-family: verdana;font-size:10pt; background: #555;  position: absolute; margin-right:5px; margin-top: -630px;}
+/*DATOS (Tabla inferior)*/
+.tit{color:#030; font-size:40pt; text-shadow: 1px 0 0 #87F, 0 1px 0 #87F,0 0 0.2em #87F; position: absolute; margin-left: 320px; margin-top: -500px; } /*Titulo del elemento*/
+#Simbolo{padding:20px; margin-left: 1035px; color:#AAF; font-family: verdana;font-size:60pt;   position: absolute; margin-right:5px; margin-top: -150px; width: 13%; text-shadow: 2px 2px 6px #000, 4px 4px 6px #555,	6px 6px 6px #999;}
+.val{font-size: 15pt; color:#0F0;} /*valencia del elemento*/
+.masa{font-size: 15pt; color:#F00;} /*masa molecular del elemento*/
+.conelec{font-size: 15pt; color:#FA0; width: 300%}/*configuracion electronica del elemento*/
+.def{height: 10px; width: 50px; padding: 0; 	font-size: 15%; color:#000;}
+.grup{font-size: 15pt; color:#306; width: 100%; text-align:right; }/*grupo del elemento*/
+.peri{font-size: 15pt; color:#33F; width: 100%; text-align:right;}/*periodo molecular del elemento*/
+.volumen{font-size: 15pt; color:#33F; width: 200%;}/*volumen del elemento*/
+.densidad{font-size: 15pt; color:#33F; width: 200%;}/*densidad del elemento*/
+
+th{width: 50px; min-width: 50px; border: none; -webkit-border-radius: 5px;}
+td{height: 50px; width: 50px; max-height: 50px; max-width: 50px; min-height: 50px; min-width: 50px; -webkit-border-radius: 3px; margin-left: 10px; font-size:17pt; font-family: verdana;}
+body{background-color: #FFF;}
+#altavoz{width:20px; height:20px; text-align: right; position:absolute;  border:none; background:url(s-on.png);}
+</style>
+<script type="text/javascript">
+
+//cadenas de datos de los elementos se pueden ampliar y añadir mas siempre y cuando se modifique la funcion e() que es la que inserta la infomación
+var simbolo =["H", "He", "Li", "Be", "B", "C", "N", "O", "F", "Ne", "Na", "Mg", "Al", "Si", "P", "S", "Cl", "Ar", "K", "Ca", "Sc", "Ti", "V", "Cr", "Mn", "Fe", "Co", "Ni", "Cu", "Zn", "Ga", "Ge", "As", "Se", "Br", "Kr", "Rb", "Sr", "Y", "Zr", "Nb", "Mo", "Tc", "Ru", "Rh", "Pd", "Ag", "Cd", "In", "Sn", "Sb", "Te", "I", "Xe", "Cs", "Ba", "La", "Ce", "Pr", "Nd", "Pm", "Sm", "Eu", "Gd", "Tb", "Dy", "Ho", "Er", "Tm", "Yb", "Lu", "Hf", "Ta", "W", "Re", "Os", "Ir", "Pt", "Au", "Hg", "Tl", "Pb", "Bi", "Po", "At", "Rn", "Fr", "Ra", "Ac", "Th", "Pa", "U", "Np", "Pu", "Am", "Cm", "Bk", "Cf", "Es", "Fm", "Md", "No", "Lr", "Rf", "Db", "Sg", "Bh", "Hs", "Mt", "Ds", "Rg", "Cn", "Uut", "Uuq", "Uup", "Uuh", "Uus", "Uuo"] //simbolo
+
+var elemento =["Hidr&oacute;geno", "Helio", "Litio", "Berilio", "Boro", "Carbono", "Nitr&oacute;geno", "&Oacute;xigeno", "Fl&uacute;or", "Ne&oacute;n", "Sodio", "Magnesio", "Aluminio", "Silicio", "F&oacute;sforo", "Azufre", "Cloro", "Arg&oacute;n", "Potasio", "Calcio", "Escandio", "Titanio", "Vanadio", "Cromo", "Manganeso", "Hierro", "Cobalto", "N&iacute;quel", "Cobre", "Zinc", "Galio", "Germanio", "Ars&eacute;nico", "Selenio", "Bromo", "Kript&oacute;n", "Rubidio", "Estroncio", "Itrio", "Circonio", "Niobio", "Molibdeno", "Tecnecio", "Rutenio", "Rodio", "Paladio", "Plata", "Cadmio", "Indio", "Esta&ntilde;o", "Antimonio", "Telurio", "Yodo", "Xen&oacute;n", "Cesio", "Bario", "Lantano", "Cerio", "Praseodimio", "Neodimio", "Prometio", "Samario", "Europio", "Gadolinio", "Terbio", "Disprosio", "Holmio", "Erbio", "Tulio", "Iterbio", "Lutecio", "Hafnio", "Tantalio", "Wolframio", "Renio", "Osmio", "Iridio", "Platino", "Oro", "Mercurio", "Talio", "Plomo", "Bismuto", "Polonio", "Astato", "Rad&oacute;n", "Francio", "Radio", "Actinio", "Torio", "Protactinio", "Uranio", "Neptunio", "Plutonio", "Americio", "Curio", "Berkelio", "Californio", "Einsteinio", "Fermio", "Mendelevio", "Nobelio", "Lawrencio", "Rutherfordio", "Dubnio", "Seaborgio", "Bohrio", "Hassio", "Meitnerio", "Darmstadio", "Roentgenio", "Copernicio", "Ununtrio", "Ununquadio", "Ununpentio", "Ununhexio", "Ununseptio", "Ununoctio"] // Elemento
+
+var masa =["1.0079", "4.0026", "6.941", "9.0122", "10.811", "12.0107", "14.0067", "15.9994", "18.9984", "20.1797", "22.9897", "24.305", "26.9815", "28.0855", "30.9738", "32.065", "35.453", "39.0983", "39.948", "40.078", "44.9559", "47.867", "50.9415", "51.9961", "54.938", "55.845", "58.6934", "58.9332", "63.546", "65.39", "69.723", "72.641", "74.9216", "78.96", "79.904", "83.8", "85.4678", "87.62", "88.9059", "91.224", "92.9064", "95.94", "98", "101.07", "102.9055", "106.42", "107.8682", "112.411", "114.818", "118.71", "121.76", "127.6", "126.9045", "131.293", "132.9055", "137.327", "138.9055", "140.116", "140.9077", "144.24", "145", "150.36", "151.964", "157.25", "158.9253", "162.5", "164.9303", "167.259", "168.9342", "173.04", "174.967", "178.49", "180.9479", "183.84", "186.207", "190.23", "192.217", "195.078", "196.9665", "200.59", "204.3833", "207.2", "208.9804", "209", "210", "222", "223.0197", "226.0254", "227.0278", "232.03806", "231.03588", "238.02891", "237.0482", "244.0642", "243.0614", "247.0703", "247.0703", "251.0796", "252.0829", "257.0951", "258.0986", "259.1009", "260.1053", "261.1087", "262.1138", "263.1182", "262.1229", "265", "266", "269", "272", "285", "284", "289", "288", "290", "?", "294"] //masa
+
+var valencia =["1", "-", "1", "2", "1, 3", "2, 4", "1, 3, 5", "2", "1, 3, 5, 7", "-", "1", "2", "1, 3", "2, 4", "1, 3, 5", "2, 4, 6", "1, 3, 5, 7", "-", "1", "2", "2, 3", "2, 3, 4", "2, 3, 5", "2, 3, 6", "2, 3, 4, 6, 7", "2, 3", "2, 3", "2, 3", "1, 2", "2", "1, 3", "2, 4", "1, 3, 5", "2, 4, 6", "1, 3, 5, 7", "-", "1", "2", "Y", "Zr", "Nb", "2, 4, 6", "Tc", "2, 4", "2, 4", "2, 4", "1", "2", "1, 3", "2, 4", "1, 3, 5", "2, 4, 6", "1, 3, 5, 7", "-", "1", "2", "La", "Ce", "Pr", "Nd", "Pm", "Sm", "Eu", "Gd", "Tb", "Dy", "Ho", "Er", "Tm", "Yb", "Lu", "Hf", "Ta", "2, 4, 6", "Re", "2, 4", "2, 4", "2, 4", "1, 3", "1, 2", "1, 3", "2, 4", "1, 3, 5", "2, 4, 6", "1, 3, 5, 7", "-", "1", "2", "Ac", "Th", "Pa", "U", "Np", "Pu", "Am", "Cm", "Bk", "Cf", "Es", "Fm", "Md", "No", "Lr", "Rf", "Db", "Sg", "Bh", "Hs", "Mt", "Ds", "Rg", "Uub"] // valencias
+
+var grupo = ["1", "18", "1", "2", "13", "14", "15", "16", "17", "18", "1", "2", "13", "14", "15", "16", "17", "18", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "1", "2", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "1", "2", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18"] //grupo
+var periodo = ["1", "1", "2", "2", "2", "2", "2", "2", "2", "2", "3", "3", "3", "3", "3", "3", "3", "3", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "4", "5", "5", "5", "5", "5", "5", "5", "5", "5", "5", "5", "5", "5", "5", "5", "5", "5", "5", "6", "6", "-6", "-6", "-6", "-6", "-6", "-6", "-6", "-6", "-6", "-6", "-6", "-6", "-6", "-6", "-6", "6", "6", "6", "6", "6", "6", "6", "6", "6", "6", "6", "6", "6", "6", "6", "7", "7", "-7", "-7", "-7", "-7", "-7", "-7", "-7", "-7", "-7", "-7", "-7", "-7", "-7", "-7", "-7", "7", "7", "7", "7", "7", "7", "7", "7", "7", "7", "7", "7", "7", "7", "7"] //periodo
+var volumen =["14.4", "27.2", "13.1", "5", "4.6", "4.58", "17.3", "14", "17.1", "16.7", "23.7", "13.97", "10", "12.1", "17", "15.5", "22.7", "28.5", "45.46", "29.9", "15", "10.64", "8.78", "7.23", "1.39", "7.1", "6.7", "6.59", "7.1", "9.2", "11.8", "13.6", "13.1", "16.45", "23.5", "38.9", "55.9", "33.7", "19.8", "14.1", "10.87", "9.4", "8.5", "8.3", "8.3", "8.9", "10.3", "13.1", "15.7", "16.3", "18.23", "20.5", "25.74", "37.3", "71.07", "39.24", "20.73", "20.67", "20.8", "20.6", "22.39", "19.95", "28.9", "19.9", "19.2", "19", "18.7", "18.4", "18.1", "24.69", "17.78", "13.6", "10.9", "9.53", "8.85", "8.49", "8.54", "9.1", "10.2", "14.82", "17.2", "18.17", "21.3", "22.23", "", "50.5", "", "45.2", "22.54", "19.9", "15", "12.59", "11.62", "12.32", "17.86", "18.28", "16.7", "", "", "Fm", "Md", "No", "Lr", "Rf", "Db", "Sg", "Bh", "Hs", "Mt", "Ds", "Rg", "Cn", "Uut", "Uuq", "Uup", "Uuh", "Uus", "Uuo"] //volumen
+var densidad =["76", "125", "534", "1848", "2340", "3513", "1026", "2000", "1516", "1444", "971", "1738", "2698", "2329", "1820", "2070", "2030", "1656", "862", "1550", "2989", "4540", "6110", "7190", "7440", "7874", "8900", "8902", "8960", "7133", "5907", "5323", "5780", "4790", "4050", "2823", "1532", "2540", "4469", "6509", "8570", "10220", "11500", "12370", "12410", "12020", "10500", "8650", "7310", "7310", "6691", "6240", "4930", "3540", "1873", "3594", "6145", "1873", "6773", "7007", "7220", "7520", "5243", "7900", "8229", "8550", "8795", "9066", "9321", "6965", "9840", "13310", "16654", "19300", "21020", "22590", "22560", "21450", "19320", "13546", "11850", "11350", "9747", "9320", "", "4400", "", "5500", "10060", "11720", "15370", "18950", "20250", "19840", "13670", "13300", "14790", "15100", "Es", "Fm", "Md", "No", "Lr", "Rf", "Db", "Sg", "Bh", "Hs", "Mt", "Ds", "Rg", "Cn", "Uut", "Uuq", "Uup", "Uuh", "Uus", "Uuo"] //densidad
+
+var configuracion =["1s<sup>1</sup>", "1s<sup>2</sup>", "Li", "Be", "B", "C", "N", "O", "F", "Ne", "Na", "Mg", "Al", "Si", "P", "S", "Cl", "Ar", "K", "Ca", "Sc", "Ti", "V", "Cr", "Mn", "Fe", "Co", "Ni", "Cu", "Zn", "Ga", "Ge", "As", "Se", "Br", "Kr", "Rb", "Sr", "Y", "Zr", "Nb", "Mo", "Tc", "Ru", "Rh", "Pd", "Ag", "Cd", "In", "Sn", "Sb", "Te", "I", "Xe", "Cs", "Ba", "La", "Ce", "Pr", "Nd", "Pm", "Sm", "Eu", "Gd", "Tb", "Dy", "Ho", "Er", "Tm", "Yb", "Lu", "Hf", "Ta", "W", "Re", "Os", "Ir", "Pt", "Au", "Hg", "Tl", "Pb", "Bi", "Po", "At", "Rn", "Fr", "Ra", "Ac", "Th", "Pa", "U", "Np", "Pu", "Am", "Cm", "Bk", "1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>6</sup> 3s<sup>2</sup> 3p<sup>6</sup> 4s<sup>2</sup> 3d<sup>10</sup> 4p<sup>6</sup> 5s<sup>2</sup> 4d<sup>10</sup> 5p<sup>6</sup> 6s<sup>2</sup> 4f<sup>14</sup> 5d<sup>10</sup> 6p<sup>6</sup> 7s<sup>2</sup> 5f<sup>10</sup>", "1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>6</sup> 3s<sup>2</sup> 3p<sup>6</sup> 4s<sup>2</sup> 3d<sup>10</sup> 4p<sup>6</sup> 5s<sup>2</sup> 4d<sup>10</sup> 5p<sup>6</sup> 6s<sup>2</sup> 4f<sup>14</sup> 5d<sup>10</sup> 6p<sup>6</sup> 7s<sup>2</sup> 5f<sup>11</sup>", "1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>6</sup> 3s<sup>2</sup> 3p<sup>6</sup> 4s<sup>2</sup> 3d<sup>10</sup> 4p<sup>6</sup> 5s<sup>2</sup> 4d<sup>10</sup> 5p<sup>6</sup> 6s<sup>2</sup> 4f<sup>14</sup> 5d<sup>10</sup> 6p<sup>6</sup> 7s<sup>2</sup> 5f<sup>12</sup>", "1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>6</sup> 3s<sup>2</sup> 3p<sup>6</sup> 4s<sup>2</sup> 3d<sup>10</sup> 4p<sup>6</sup> 5s<sup>2</sup> 4d<sup>10</sup> 5p<sup>6</sup> 6s<sup>2</sup> 4f<sup>14</sup> 5d<sup>10</sup> 6p<sup>6</sup> 7s<sup>2</sup> 5f<sup>13</sup>", "1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>6</sup> 3s<sup>2</sup> 3p<sup>6</sup> 4s<sup>2</sup> 3d<sup>10</sup> 4p<sup>6</sup> 5s<sup>2</sup> 4d<sup>10</sup> 5p<sup>6</sup> 6s<sup>2</sup> 4f<sup>14</sup> 5d<sup>10</sup> 6p<sup>6</sup> 7s<sup>2</sup> 5f<sup>14</sup>", "1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>6</sup> 3s<sup>2</sup> 3p<sup>6</sup> 4s<sup>2</sup> 3d<sup>10</sup> 4p<sup>6</sup> 5s<sup>2</sup> 4d<sup>10</sup> 5p<sup>6</sup> 6s<sup>2</sup> 4f<sup>14</sup> 5d<sup>10</sup> 6p<sup>6</sup> 7s<sup>2</sup> 5f<sup>14</sup> 6d<sup>1</sup>", "1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>6</sup> 3s<sup>2</sup> 3p<sup>6</sup> 4s<sup>2</sup> 3d<sup>10</sup> 4p<sup>6</sup> 5s<sup>2</sup> 4d<sup>10</sup> 5p<sup>6</sup> 6s<sup>2</sup> 4f<sup>14</sup> 5d<sup>10</sup> 6p<sup>6</sup> 7s<sup>2</sup> 5f<sup>14</sup> 6d<sup>2</sup>", "1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>6</sup> 3s<sup>2</sup> 3p<sup>6</sup> 4s<sup>2</sup> 3d<sup>10</sup> 4p<sup>6</sup> 5s<sup>2</sup> 4d<sup>10</sup> 5p<sup>6</sup> 6s<sup>2</sup> 4f<sup>14</sup> 5d<sup>10</sup> 6p<sup>6</sup> 7s<sup>2</sup> 5f<sup>14</sup> 6d<sup>3</sup>", "1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>6</sup> 3s<sup>2</sup> 3p<sup>6</sup> 4s<sup>2</sup> 3d<sup>10</sup> 4p<sup>6</sup> 5s<sup>2</sup> 4d<sup>10</sup> 5p<sup>6</sup> 6s<sup>2</sup> 4f<sup>14</sup> 5d<sup>10</sup> 6p<sup>6</sup> 7s<sup>2</sup> 5f<sup>14</sup> 6d<sup>4</sup>", "1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>6</sup> 3s<sup>2</sup> 3p<sup>6</sup> 4s<sup>2</sup> 3d<sup>10</sup> 4p<sup>6</sup> 5s<sup>2</sup> 4d<sup>10</sup> 5p<sup>6</sup> 6s<sup>2</sup> 4f<sup>14</sup> 5d<sup>10</sup> 6p<sup>6</sup> 7s<sup>2</sup> 5f<sup>14</sup> 6d<sup>5</sup>", "1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>6</sup> 3s<sup>2</sup> 3p<sup>6</sup> 4s<sup>2</sup> 3d<sup>10</sup> 4p<sup>6</sup> 5s<sup>2</sup> 4d<sup>10</sup> 5p<sup>6</sup> 6s<sup>2</sup> 4f<sup>14</sup> 5d<sup>10</sup> 6p<sup>6</sup> 7s<sup>2</sup> 5f<sup>14</sup> 6d<sup>6</sup>", "1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>6</sup> 3s<sup>2</sup> 3p<sup>6</sup> 4s<sup>2</sup> 3d<sup>10</sup> 4p<sup>6</sup> 5s<sup>2</sup> 4d<sup>10</sup> 5p<sup>6</sup> 6s<sup>2</sup> 4f<sup>14</sup> 5d<sup>10</sup> 6p<sup>6</sup> 7s<sup>2</sup> 5f<sup>14</sup> 6d<sup>7</sup>", "1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>6</sup> 3s<sup>2</sup> 3p<sup>6</sup> 4s<sup>2</sup> 3d<sup>10</sup> 4p<sup>6</sup> 5s<sup>2</sup> 4d<sup>10</sup> 5p<sup>6</sup> 6s<sup>2</sup> 4f<sup>14</sup> 5d<sup>10</sup> 6p<sup>6</sup> 7s<sup>2</sup> 5f<sup>14</sup> 6d<sup>8</sup>", "1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>6</sup> 3s<sup>2</sup> 3p<sup>6</sup> 4s<sup>2</sup> 3d<sup>10</sup> 4p<sup>6</sup> 5s<sup>2</sup> 4d<sup>10</sup> 5p<sup>6</sup> 6s<sup>2</sup> 4f<sup>14</sup> 5d<sup>10</sup> 6p<sup>6</sup> 7s<sup>2</sup> 5f<sup>14</sup> 6d<sup>9</sup>", "1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>6</sup> 3s<sup>2</sup> 3p<sup>6</sup> 4s<sup>2</sup> 3d<sup>10</sup> 4p<sup>6</sup> 5s<sup>2</sup> 4d<sup>10</sup> 5p<sup>6</sup> 6s<sup>2</sup> 4f<sup>14</sup> 5d<sup>10</sup> 6p<sup>6</sup> 7s<sup>2</sup> 5f<sup>14</sup> 6d<sup>10</sup>", "1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>6</sup> 3s<sup>2</sup> 3p<sup>6</sup> 4s<sup>2</sup> 3d<sup>10</sup> 4p<sup>6</sup> 5s<sup>2</sup> 4d<sup>10</sup> 5p<sup>6</sup> 6s<sup>2</sup> 4f<sup>14</sup> 5d<sup>10</sup> 6p<sup>6</sup> 7s<sup>2</sup> 5f<sup>14</sup> 6d<sup>10</sup> 7p<sup>1</sup>", "1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>6</sup> 3s<sup>2</sup> 3p<sup>6</sup> 4s<sup>2</sup> 3d<sup>10</sup> 4p<sup>6</sup> 5s<sup>2</sup> 4d<sup>10</sup> 5p<sup>6</sup> 6s<sup>2</sup> 4f<sup>14</sup> 5d<sup>10</sup> 6p<sup>6</sup> 7s<sup>2</sup> 5f<sup>14</sup> 6d<sup>10</sup> 7p<sup>2</sup>", "1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>6</sup> 3s<sup>2</sup> 3p<sup>6</sup> 4s<sup>2</sup> 3d<sup>10</sup> 4p<sup>6</sup> 5s<sup>2</sup> 4d<sup>10</sup> 5p<sup>6</sup> 6s<sup>2</sup> 4f<sup>14</sup> 5d<sup>10</sup> 6p<sup>6</sup> 7s<sup>2</sup> 5f<sup>14</sup> 6d<sup>10</sup> 7p<sup>3</sup>", "1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>6</sup> 3s<sup>2</sup> 3p<sup>6</sup> 4s<sup>2</sup> 3d<sup>10</sup> 4p<sup>6</sup> 5s<sup>2</sup> 4d<sup>10</sup> 5p<sup>6</sup> 6s<sup>2</sup> 4f<sup>14</sup> 5d<sup>10</sup> 6p<sup>6</sup> 7s<sup>2</sup> 5f<sup>14</sup> 6d<sup>10</sup> 7p<sup>4</sup>", "1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>6</sup> 3s<sup>2</sup> 3p<sup>6</sup> 4s<sup>2</sup> 3d<sup>10</sup> 4p<sup>6</sup> 5s<sup>2</sup> 4d<sup>10</sup> 5p<sup>6</sup> 6s<sup>2</sup> 4f<sup>14</sup> 5d<sup>10</sup> 6p<sup>6</sup> 7s<sup>2</sup> 5f<sup>14</sup> 6d<sup>10</sup> 7p<sup>5</sup>", "1s<sup>2</sup> 2s<sup>2</sup> 2p<sup>6</sup> 3s<sup>2</sup> 3p<sup>6</sup> 4s<sup>2</sup> 3d<sup>10</sup> 4p<sup>6</sup> 5s<sup>2</sup> 4d<sup>10</sup> 5p<sup>6</sup> 6s<sup>2</sup> 4f<sup>14</sup> 5d<sup>10</sup> 6p<sup>6</sup> 7s<sup>2</sup> 5f<sup>14</sup> 6d<sup>10</sup> 7p<sup>6</sup>"] //configuración
+
+var radio =["H", "He", "Li", "Be", "B", "C", "N", "O", "F", "Ne", "Na", "Mg", "Al", "Si", "P", "S", "Cl", "Ar", "K", "Ca", "Sc", "Ti", "V", "Cr", "Mn", "Fe", "Co", "Ni", "Cu", "Zn", "Ga", "Ge", "As", "Se", "Br", "Kr", "Rb", "Sr", "Y", "Zr", "Nb", "Mo", "Tc", "Ru", "Rh", "Pd", "Ag", "Cd", "In", "Sn", "Sb", "Te", "I", "Xe", "Cs", "Ba", "La", "Ce", "Pr", "Nd", "Pm", "Sm", "Eu", "Gd", "Tb", "Dy", "Ho", "Er", "Tm", "Yb", "Lu", "Hf", "Ta", "W", "Re", "Os", "Ir", "Pt", "Au", "Hg", "Tl", "Pb", "Bi", "Po", "At", "Rn", "Fr", "Ra", "Ac", "Th", "Pa", "U", "Np", "Pu", "Am", "Cm", "Bk", "Cf", "Es", "Fm", "Md", "No", "Lr", "Rf", "Db", "Sg", "Bh", "Hs", "Mt", "Ds", "Rg", "Cn", "Uut", "Uuq", "Uup", "Uuh", "Uus", "Uuo"] //simbolo
+
+
+var sonido="on" // on encendido off apagad
+var audiotag
+function e(n) {
+	var num = n;
+	num--
+	var densidad2 = masa[num]/volumen[num]
+	if (densidad2=="NaN" || densidad2==NaN || densidad2=="Infinity"){densidad2="?"};
+	var volumen2 = (0.001*masa[num])/(densidad[num])
+	// en m³/mol
+	var per=periodo[num]
+	if (per==-6) {per=6};
+	if (per==-7) {per=7};
+	var gru=grupo[num]
+	if (gru==1) {gru="IA"} else if (gru==2) {gru="IIA"} else if (gru==3) {gru="IIIB"} else if (gru==4) {gru="IVB"} else if (gru==5) {gru="VB"} else if (gru==6) {gru="VIB"} else if (gru==7) {gru="VIIB"} else if (gru==8 || gru==9 || gru==10){gru="VIIIB"} else if (gru==11) {gru="IB"} else if (gru==12) {gru="IIB"} else if (gru==13) {gru="IIIA"} else if (gru==14) {gru="IVA"} else if (gru==15) {gru="VA"} else if (gru==16) {gru="VIA"} else if (gru==17) {gru="VIIA"} else if (gru==18) {gru="VIIIA"}
+	if (sonido=="on"){audiotag="<audio id='sound' autoplay='true' hidden='true' controls ><source src='clic.ogg' type='audio/ogg' ></audio>"} else {audiotag=""} 
+	document.getElementById("informa").innerHTML = audiotag+"<div id='simbolo'>"+simbolo[num]+"</div><div class='tit'>"+elemento[num]+"</div><table width='100%'><tbody><tr><td><p class='val'>Valencias: "+valencia[num]+"</p></td><td><p class='densidad'>Densidad: "+densidad[num]+" kg/m<sup>3</sup></td><td></td></tr><tr><td><p class='masa'>Masa At&oacute;mica: "+masa[num]+" g/mol</p></td><td></td><td><p class='grup'>Grupo: "+grupo[num]+" &oacute; "+gru+"</p></td></tr><tr><td><p class='conelec'>Configuraci&oacute;n Electr&oacute;nica: "+configuracion[num]+" </p></td><td></td><td><p class='peri'>Periodo: "+per+"</p></td></tr><tr><td><p class='volumen'>Volumen: "+volumen[num]+" cm<sup>3</sup>/mol</p></td><td></p></td><td></td></tr></tbody></table>"
+	f(n)
+};
+
+function clear() {
+	$('#g1,#g2,#g3,#g4,#g5,#g6,#g7,#g8,#g9,#g10,#g11,#g12,#g13,#g14,#g15,#g16,#g17,#g18').css("background-image", "none")
+	$('#p1,#p2,#p3,#p4,#p5,#p6,#p7,#p-6,#p-7').css("background-image", "none")
+};
+
+function f(n) {
+	var num = n;
+	num--
+var gru = parseInt(grupo[num]);
+var per = parseInt(periodo[num]);
+  clear()	
+  if (gru==1){ $('#g1').css("background", "url(g.png)")};
+  if (gru==2){ $('#g2').css("background", "url(g.png)")};
+  if (gru==3){ $('#g3').css("background", "url(g.png)")};
+  if (gru==4){ $('#g4').css("background", "url(g.png)")};
+  if (gru==5){ $('#g5').css("background", "url(g.png)")};
+  if (gru==6){ $('#g6').css("background", "url(g.png)")};
+  if (gru==7){ $('#g7').css("background", "url(g.png)")};
+  if (gru==8){ $('#g8').css("background", "url(g.png)")};
+  if (gru==9){ $('#g9').css("background", "url(g.png)")};  
+  if (gru==10){ $('#g10').css("background", "url(g.png)")};  
+  if (gru==11){ $('#g11').css("background", "url(g.png)")};  
+  if (gru==12){ $('#g12').css("background", "url(g.png)")};  
+  if (gru==13){ $('#g13').css("background", "url(g.png)")};  
+  if (gru==14){ $('#g14').css("background", "url(g.png)")};  
+  if (gru==15){ $('#g15').css("background", "url(g.png)")};  
+  if (gru==16){ $('#g16').css("background", "url(g.png)")};  
+  if (gru==17){ $('#g17').css("background", "url(g.png)")};  
+  if (gru==18){ $('#g18').css("background", "url(g.png)")};
+  if (per==1){ $('#p1').css("background", "url(p.png)")};
+  if (per==2){ $('#p2').css("background", "url(p.png)")};
+  if (per==3){ $('#p3').css("background", "url(p.png)")};
+  if (per==4){ $('#p4').css("background", "url(p.png)")};
+  if (per==5){ $('#p5').css("background", "url(p.png)")};
+  if (per==6){ $('#p6').css("background", "url(p.png)")};
+  if (per==7){ $('#p7').css("background", "url(p.png)")};
+  if (per==-6){ $('#p-6').css("background", "url(p.png)")};
+  if (per==-7){ $('#p-7').css("background", "url(p.png)")};              
+};
+
+function oo() {                                            // apagar-encender sonido
+  if (sonido=="on") {                                     // si esta encendido
+  	$('#altavoz').css("background", "url(s-off.png)")    // pon la imagen apagado
+  	sonido="off"                                        // apaga
+  }                                                    //
+  else {	                                          // sino esta encendido
+   	$('#altavoz').css("background", "url(s-on.png)") // pon imagen de encendido 
+   	sonido="on"                                     // enciende
+  }                                                // 
+};                                                //
+
+// Evita la selección
+document.onmousedown = new Function("return false");
+document.onselectstart = new Function ("return false");
+if (window.sidebar) {
+   document.onmousedown = new Function("return false");
+   document.onclick = new Function("return true");
+}
+</script>
+</head>
+<body> 
+<table id="tablaperiodica">
+<thead><tr><th></th><th id="g1">1</th><th id="g2">2</th><th id="g3">3</th><th id="g4">4</th><th id="g5">5</th><th id="g6">6</th><th id="g7">7</th><th id="g8">8</th><th id="g9">9</th><th id="g10">10</th><th id="g11">11</th><th id="g12">12</th><th id="g13">13</th><th id="g14">14</th><th id="g15">15</th><th id="g16">16</th>	<th id="g17">17</th><th id="g18">18</th></tr><tr><th></th><th>IA</th><th> IIA</th><th> IIIB</th><th> IVB</th><th> VB</th><th> VIB</th><th> VIIB</th><th> </th><th> VIIIB</th><th> </th><th> IB</th><th> IIB</th><th> IIIA</th><th> IVA</th><th>VA</th><th>VIA</th><th>VIIA</th><th>VIIIA</th></tr>	</thead>
+		<tbody>
+<TR> 
+	<td class="n" id="p1">1</td>
+   <TD onclick="e(1)" class="gas nm"><p class="num">1</p>H</TD> <TD></TD> <TD></TD><TD></TD> <TD></TD> <TD></TD> <TD></TD> <TD></TD> <TD></TD> <TD></TD> <TD></TD> <TD></TD> <TD></TD> <TD></TD> <TD></TD> <TD></TD> <TD></TD><TD onclick="e(2)" class="gas gn"><p class="num">2</p>He</TD>   
+</TR>
+<TR id="fila"> 
+	<td class="n" id="p2">2</td>
+   <TD onclick="e(3)" class="sol malc"><p class="num">3</p>Li</TD><TD onclick="e(4)" class="sol malct"><p class="num">4</p>Be</TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD onclick="e(5)" class="sol metlds"><p class="num">5</p>B</TD><TD onclick="e(6)" class="sol nm"><p class="num">6</p>C</TD><TD onclick="e(7)" class="gas nm"><p class="num">7</p>N</TD><TD onclick="e(8)" class="gas nm"><p class="num">8</p>O</TD><TD onclick="e(9)" class="gas hal"><p class="num">9</p>F</TD><TD onclick="e(10)" class="gas gn"><p class="num">10</p>Ne</TD>
+</TR> 
+<tr id="fila">
+	<td class="n" id="p3">3</td>
+	<TD onclick="e(11)" class="sol malc"><p class="num">11</p>Na</TD><TD onclick="e(12)" class="sol malct"><p class="num">12</p>Mg</TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD></TD><TD onclick="e(13)" class="sol om"><p class="num">13</p>Al</TD><TD onclick="e(14)" class="sol metlds"><p class="num">14</p>Si</TD><TD onclick="e(15)" class="gas nm"><p class="num">15</p>P</TD><TD onclick="e(16)" class="gas nm"><p class="num">16</p>S</TD><TD onclick="e(17)" class="gas hal"><p class="num">17</p>Cl</TD><TD onclick="e(18)" class="gas gn"><p class="num">18</p>Ar</TD> 
+</tr >
+<tr id="fila">
+	 <td class="n" id="p4">4</td>
+	<TD onclick="e(19)" class="sol malc"><p class="num">19</p>K</TD><TD onclick="e(20)" class="sol malct"><p class="num">20</p>Ca</TD><TD onclick="e(21)" class="sol etran"><p class="num">21</p>Sc</TD><TD onclick="e(22)" class="sol etran"><p class="num">22</p>Ti</TD><TD onclick="e(23)" class="sol etran"><p class="num">23</p>V</TD><TD onclick="e(24)" class="sol etran"><p class="num">24</p>Cr</TD><TD onclick="e(25)" class="sol etran"><p class="num">25</p>Mn</TD><TD onclick="e(26)" class="sol etran"><p class="num">26</p>Fe</TD><TD onclick="e(27)" class="sol etran"><p class="num">27</p>Co</TD><TD onclick="e(28)" class="sol etran"><p class="num">28</p>Ni</TD><TD onclick="e(29)" class="sol etran"><p class="num">29</p>Cu</TD><TD onclick="e(30)" class="sol etran"><p class="num">30</p>Zn</TD><TD onclick="e(31)" class="sol om"><p class="num">31</p>Ga</TD><TD onclick="e(32)" class="sol metlds"><p class="num">32</p>Ge</TD><TD onclick="e(33)" class="sol metlds" ><p class="num">33</p>As</TD><TD onclick="e(34)" class="gas nm"><p class="num">34</p>Se</TD><TD onclick="e(35)" class="liq hal"><p class="num">35</p>Br</TD><TD onclick="e(36)" class="gas gn"><p class="num">36</p>Kr</TD>
+</tr>
+<tr id="fila">
+	<td class="n" id="p5">5</td>
+	<TD onclick="e(37)" class="sol malc"><p class="num">37</p>Rb</TD><TD class="sol malct" onclick="e(38)"><p class="num">38</p>Sr</TD><TD onclick="e(39)" class="sol etran"><p class="num">39</p>Y</TD><TD class="sol etran" onclick="e(40)"><p class="num">40</p>Zr</TD><TD onclick="e(41)" class="sol etran"><p class="num">41</p>Nb</TD><TD onclick="e(42)" class="sol etran"><p class="num">42</p>Mo</TD><TD onclick="e(43)" class="sin etran"><p class="num">43</p>Tc</TD><TD onclick="e(44)" class="sol etran"><p class="num">44</p>Ru</TD><TD onclick="e(45)" class="sol etran"><p class="num">45</p>Rh</TD><TD onclick="e(46)" class="sol etran"><p class="num">46</p>Pd</TD><TD onclick="e(47)" class="sol etran"><p class="num">47</p>Ag</TD><TD onclick="e(48)" class="sol etran"><p class="num">48</p>Cd</TD><TD onclick="e(49)" class="sol om"><p class="num">49</p>In</TD><TD onclick="e(50)" class="sol om"><p class="num">50</p>Sn</TD><TD onclick="e(51)" class="sol metlds"><p class="num">51</p>Sb</TD><TD onclick="e(52)" class="sol metlds"><p class="num">52</p>Te</TD><TD onclick="e(53)" class="sol hal"><p class="num">53</p>I</TD><TD onclick="e(54)" class="gas gn"><p class="num">54</p>Xe</TD>
+</tr>
+<tr id="fila">
+	<td class="n" id="p6">6</td>
+	<TD onclick="e(55)" class="sol malc"><p class="num">55</p>Cs</TD><TD onclick="e(56)" class="sol malct"><p class="num">56</p>Ba</TD><TD class="lan"><p class="num">57-71</p></TD><TD onclick="e(72)"  class="sol etran"><p class="num">72</p>Hf</TD><TD onclick="e(73)" class="sol etran"><p class="num">73</p>Ta</TD><TD onclick="e(74)" class="sol etran"><p class="num">74</p>W</TD><TD onclick="e(75)" class="sol etran"><p class="num">75</p>Re</TD><TD onclick="e(76)" class="sol etran"><p class="num">76</p>Os</TD><TD onclick="e(77)" class="sol etran"><p class="num">77</p>Ir</TD><TD onclick="e(78)" class="sol etran"><p class="num">78</p>Pt</TD><TD onclick="e(79)" class="sol etran"><p class="num">79</p>Au</TD><TD onclick="e(80)" class="liq etran"><p class="num">80</p>Hg</TD><TD onclick="e(81)" class="sol om"><p class="num">81</p>Tl</TD><TD onclick="e(82)" class="sol om"><p class="num">82</p>Pb</TD><TD onclick="e(83)" class="sol om"><p class="num">83</p>Bi</TD><TD onclick="e(84)" class="sol metlds"><p class="num">84</p>Po</TD><TD onclick="e(85)" class="sol hal"><p class="num">85</p>At</TD><TD onclick="e(86)" class="gas gn"><p class="num">86</p>Rn</TD>             
+</tr>
+<tr id="fila">
+	<td class="n" id="p7">7</td>
+	<TD onclick="e(87)" class="sol malc"><p class="num">87</p>Fr</TD><TD onclick="e(88)" class="sol malct"><p class="num">88</p>Ra</TD><TD class="act"><p class="num">89-103</p></TD><TD onclick="e(104)"  class="sin etran"><p class="num">104</p>Rf</TD><TD onclick="e(105)" class="sin etran"><p class="num">105</p>Db</TD><TD onclick="e(106)" class="sin etran"><p class="num">106</p>Sg</TD><TD onclick="e(107)" class="sin etran"><p class="num">107</p>Bh</TD><TD onclick="e(108)" class="sin etran"><p class="num">108</p>Hs</TD><TD onclick="e(109)" class="sin etran"><p class="num">109</p>Mt</TD><TD onclick="e(110)" class="sin etran"><p class="num">110</p>Ds</TD><TD onclick="e(111)" class="sin etran"><p class="num">111</p>Rg</TD><TD onclick="e(112)" class="sin etran"><p class="num">112</p>Cn</TD><TD onclick="e(113)" class="sin om"><p class="num">113</p>Uut</TD><TD onclick="e(114)" class="sin om"><p class="num">114</p>Uuq</TD><TD onclick="e(115)" class="sin om"><p class="num">115</p>Uup</TD><TD onclick="e(116)" class="sin om"><p class="num">116</p>Uuh</TD><TD onclick="e(117)" class="sin hal"><p class="num">117</p>Uus</TD><TD onclick="e(118)" class="sin gn"><p class="num">118</p>Uuo</TD>  
+</tr>
+
+<tr id="fila"><td class="def"></td><td class="def"></td><td class="def"></td><td class="def"><p class="num">Lant&aacute;nidos</p></td></tr>
+<tr id="fila">
+	<td></td><td></td><td class="n" id="p-6">6</td><TD onclick="e(57)"  class="sol lan"><p class="num">57</p>La</TD><TD onclick="e(58)" class="sol lan"><p class="num">58</p>Ce</TD><TD onclick="e(59)" class="sol lan"><p class="num">59</p>Pr</TD><TD onclick="e(60)" class="sol lan"><p class="num">60</p>Nd</TD><TD onclick="e(61)" class="sin lan"><p class="num">61</p>Pm</TD><TD onclick="e(62)" class="sol lan"><p class="num">62</p>Sm</TD><TD onclick="e(63)" class="sol lan"><p class="num">63</p>Eu</TD><TD onclick="e(64)" class="sol lan"><p class="num">64</p>Gd</TD><TD onclick="e(65)" class="sol lan"><p class="num">65</p>Tb</TD><TD onclick="e(66)" class="sol lan"><p class="num">66</p>Dy</TD><TD onclick="e(67)" class="sol lan"><p class="num">67</p>Ho</TD><TD onclick="e(68)" class="sol lan"><p class="num">68</p>Er</TD><TD onclick="e(69)" class="sol lan"><p class="num">69</p>Tm</TD><TD onclick="e(70)" class="sol lan"><p class="num">70</p>Yb</TD><TD onclick="e(71)" class="sol lan"><p class="num">71</p>Lu</TD>
+</tr>
+
+<tr><td class="def"></td><td class="def"></td><td class="def"></td><td class="def"><p class="num">Act&iacute;nidos</p></td></tr>
+<tr id="fila">
+	<td></td><td></td><td class="n" id="p-7">7</td><TD onclick="e(89)" class="sol act"><p class="num">89</p>Ac</TD><TD onclick="e(90)" class="sol act"><p class="num">90</p>Th</TD><TD onclick="e(91)" class="sol act"><p class="num">91</p>Pa</TD><TD onclick="e(92)" class="sol act"><p class="num">92</p>U</TD><TD onclick="e(93)" class="sin act"><p class="num">93</p>Np</TD><TD onclick="e(94)" class="sin act"><p class="num">94</p>Pu</TD><TD onclick="e(95)" class="sin act"><p class="num">95</p>Am</TD><TD onclick="e(96)" class="sin act"><p class="num">96</p>Cm</TD><TD onclick="e(97)" class="sin act"><p class="num">97</p>Bk</TD><TD onclick="e(98)" class="sin act"><p class="num">98</p>Cf</TD><TD onclick="e(99)" class="sin act"><p class="num">99</p>Es</TD><TD onclick="e(100)" class="sin act"><p class="num">100</p>Fm</TD><TD onclick="e(101)" class="sin act"><p class="num">101</p>Md</TD><TD onclick="e(102)" class="sin act"><p class="num">102</p>No</TD><TD onclick="e(103)" class="sin act"><p class="num">103</p>Lr</TD>
+</tr>
+	</tbody>
+</table>
+<div id="leyenda"><div id="altavoz" onclick="oo()"></div><p style="padding-left:30px; margin-top:0px;">Estado F&iacute;sico:</p><hr size="3px" style="background: #FFF"/><p class="gas">Gases</p><p class="sol">S&oacute;lidos</p><p class="liq">L&iacute;quidos</p><p class="sin">Sint&eacute;ticos</p><hr size="3px" style="background: #FFF"/>
+<div class="malc" style="height: 12px; width: 12px; position: absolute; -webkit-border-radius: 3px; margin-top: 15px;"></div><p style="margin-left: 15px;"> Metales alcalinos</p>
+<div class="malct" style="height: 12px; width: 12px; position: absolute; -webkit-border-radius: 3px; margin-top: 15px;"></div><p style="margin-left: 15px;"> Metales alcalinot&eacute;rreos </p>
+<div class="etran" style="height: 12px; width: 12px; position: absolute; -webkit-border-radius: 3px; margin-top: 15px;"></div><p style="margin-left: 15px;">Elementos de transici&oacute;n</p>
+<div class="om" style="height: 12px; width: 12px; position: absolute; -webkit-border-radius: 3px; margin-top: 15px;"></div><p style="margin-left: 15px;">Otros Metales</p>
+<div class="metlds" style="height: 12px; width: 12px; position: absolute; -webkit-border-radius: 3px; margin-top: 15px;"></div><p style="margin-left: 15px;"> Metaloides</p>
+<div class="nm" style="height: 12px; width: 12px; position: absolute; -webkit-border-radius: 3px; margin-top: 15px;"></div><p style="margin-left: 15px;">No Metales</p>
+<div class="hal" style="height: 12px; width: 12px; position: absolute; -webkit-border-radius: 3px; margin-top:15px;"></div><p style="margin-left: 15px;"> Hal&oacute;genos</p>
+<div class="gn" style="height: 12px; width: 12px; position: absolute; -webkit-border-radius: 3px; margin-top: 15px;"></div><p style="margin-left: 15px;"> Gases nobles</p><hr size="3px" style="background: #FFF"/>
+<center><a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/3.0/"><img alt="Licencia de Creative Commons" style="border-width:0" src="80x15.png" /></a></center></div>
+
+<div id="informa"></div>
+</body>
+</html>

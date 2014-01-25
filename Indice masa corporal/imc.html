@@ -1,0 +1,110 @@
+<html>
+<head>
+<style type="text/css">
+.boton {
+width: 200px;
+border-width: 1px;
+color: #FFF;
+margin: 20px;
+margin-left:50px;
+background-color: #370;
+-moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;
+-moz-box-shadow:inset 0 1px 0 rgba(255,255,255,0.5);
+-webkit-box-shadow:inset 0 1px 0 rgba(255,255,255,0.5);
+box-shadow:inset 0 1px 0 rgba(255,255,255,0.5);
+font-size: 30pt;
+}
+.boton:hover {
+border-top-color: #00A;
+border-left-color: #00A;
+border-bottom-color: #00F;
+border-right-color: #00F;
+background-color: #150;
+color: #770;
+}
+.boton:active{
+	background-color: #0A0;
+	border: 0px;
+	color: #FF0;
+	position:relative;top:2px;
+}
+#contene{
+	margin: 20%;
+}
+.img{
+	margin-left:20px;
+}
+#forma{
+	margin-top:-272px;
+	margin-left:305px;
+	
+}
+label{
+	font-size: 25px;
+	color:#aaa;
+}
+input{
+	border-width: 0px;
+	background: #aaa;
+	width: 50px;
+	font-size: 25px;
+	color:#fff;
+}
+form{
+
+}
+.r{
+	border-width: 0px;
+	background: #fff;
+	width: 300px;
+	font-size: 30px;
+	color:#F00;
+}
+.com{
+	border-width: 0px;
+	background: #fff;
+	width: 500px;
+	font-size: 30px;
+	color:#000;
+}
+body{
+	
+}
+</style>
+<title>Indice de Masa Corporal</title>
+<script type="text/javascript">
+function calcular () {
+	var imc = (parseFloat(document.forma.peso.value)/Math.pow(parseFloat(document.forma.altura.value),2));
+	document.forma.imc.value=imc;
+  
+  	if (imc >= 50){
+  		document.forma.coment.value="Obesidad de Tipo IV (Extrema)";
+  	} else if (imc >= 40 ) {
+  		document.forma.coment.value="Obesidad de Tipo III (Morvida)";
+  	} else if (imc >= 35 ) {
+  		document.forma.coment.value="Obesidad de Tipo II (Moderada)";
+  	} else if (imc >= 30 ) {
+  		document.forma.coment.value="Obesidad de Tipo I (leve)";
+  	} else if (imc >= 27 ) {
+  		document.forma.coment.value="Sobrepeso o Grado II (preobesidad)";
+  	} else if (imc >= 25 ) {
+  		document.forma.coment.value="Sobrepeso o Grado I";
+  	} else if (imc >= 18.5 ) {
+  		document.forma.coment.value="Peso Adecuado (normopeso)";
+  	} else {
+  		document.forma.coment.value="Peso Insuficiente";
+  	}
+  	
+  	if(document.forma.imc.value=="NaN"){
+  		document.forma.imc.value="";
+  		document.forma.coment.value="";  
+  		alert("Rellena los campos de peso y altura");
+  	}
+}
+</script>
+</head>
+
+<body>
+<div id="contene"><img src="imc.gif" alt="." class="img"/><form name="forma" id="forma"><label>Peso: <input type="text" name="peso" /> (kg)</label><br><label>Altura: <input type="text" name="altura" /> (m)</label><br><label>IMC: <input type="text" name="imc" class="r" disabled="true" /></label><br> <input type="text" name="coment" class="com" disabled="true"/><br><input type="button" value="Calcular" onclick="calcular()" class="boton" align="right"/></form></div>
+</body>
+</html>

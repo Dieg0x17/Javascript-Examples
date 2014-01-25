@@ -1,0 +1,820 @@
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+<title>Cambio de Unidades</title>
+<script src="js/jquery-1.6.2.js"></script> 
+<script src="js/ui/jquery.ui.core.js"></script> 
+<script src="js/ui/jquery.ui.widget.js"></script> 
+<script src="js/ui/jquery.ui.accordion.js"></script> 
+<link rel="stylesheet" href="jquery-ui.css">
+<style type="text/css">
+.boton {
+width: 100px;
+border-width: 1px;
+color: #FFF;
+margin: 3px;
+background-color: #500;
+-moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;
+-moz-box-shadow:inset 0 1px 0 rgba(255,255,255,0.5);
+-webkit-box-shadow:inset 0 1px 0 rgba(255,255,255,0.5);
+box-shadow:inset 0 1px 0 rgba(255,255,255,0.5);
+font-size: 30;
+}
+.boton:hover {
+border-top-color: #00A;
+border-left-color: #00A;
+border-bottom-color: #00F;
+border-right-color: #00F;
+background-color: #200;
+color: #F00;
+}
+.boton:active{
+	background-color: #0A0;
+	border: 0px;
+	color: #FF0;
+	position:relative;top:2px;
+}
+.pantalla {
+border-width: 1px;
+color: #000;
+-moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;
+-moz-box-shadow:inset 0 1px 0 rgba(255,255,255,0.5);
+-webkit-box-shadow:inset 0 1px 0 rgba(255,255,255,0.5);
+box-shadow:inset 0 1px 0 rgba(255,255,255,0.5);
+font-size: 30;
+width: 100%;}
+#accordion{
+	-moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;
+}
+#accordion2{
+	-moz-border-radius:10px;-webkit-border-radius:10px;border-radius:10px;
+}
+.tab{
+border-width: 1px;
+-moz-border-radius-topleft:5px;
+-moz-border-radius-topright:5px; 
+-moz-box-shadow:inset 0 1px 0 rgba(255,255,255,0.5);
+-webkit-box-shadow:inset 0 1px 0 rgba(255,255,255,0.5);
+box-shadow:inset 0 1px 0 rgba(255,255,255,0.5);
+color #FFF;
+}
+.titulo{
+	color: #F00;
+	font-family: verdana;
+	padding-left: 5%;
+}
+body{background-color: #000;}
+select{ font-family: verdana; color: white; background:#666; width: 100%;} 
+option {font-family: verdana; color: #FFF; background:#060;} 
+ 
+
+</style>
+<script> 
+	$(function() {
+		$( "#accordion" ).accordion({
+			autoHeight: false,
+			collapsible: true,
+			navigation: true
+		});
+		$( "#accordion2" ).accordion({
+			autoHeight: false,
+			collapsible: true
+		});
+	});
+</script> 
+<script type="text/javascript">
+
+function longitud() {
+	var li = parseFloat(document.Longitud.e.value); 	 //longitud inicial
+	var lf;												// longitud final
+	var ui = parseFloat(document.Longitud.UI.value);   //  unidad inicial
+	var uf = parseFloat(document.Longitud.UF.value);  //   unidad final
+	lf=(li*ui)/uf;
+	if (uf == -1){lf="Seleciona una unidad"};
+	document.Longitud.s.value=lf;	
+	if(document.Longitud.s.value=="NaN"){document.Longitud.s.value="inserta un numero valido";}
+};
+function masa() {
+	var li = parseFloat(document.Masa.e.value); 	 //masa inicial
+	var lf;											// masa final
+	var ui = parseFloat(document.Masa.UI.value);   //  unidad inicial
+	var uf = parseFloat(document.Masa.UF.value);  //   unidad final
+	lf=(li*ui)/uf;
+	if (uf == -1){lf="Seleciona una unidad"};
+	document.Masa.s.value=lf;
+	if(document.Masa.s.value=="NaN"){document.Masa.s.value="inserta un numero valido";}
+};
+function tiempo() {
+	var li = parseFloat(document.Tiempo.e.value); 	   //Tiempo inicial
+	var lf;											  // Tiempo final
+	var ui = parseFloat(document.Tiempo.UI.value);   //  unidad inicial
+	var uf = parseFloat(document.Tiempo.UF.value);  //   unidad final
+	lf=(li*ui)/uf;
+	if (uf == -1){lf="Seleciona una unidad"};
+	document.Tiempo.s.value=lf;
+	if(document.Tiempo.s.value=="NaN"){document.Tiempo.s.value="inserta un numero valido";}
+};
+function temperatura() {
+	var Ti = parseFloat(document.Temperatura.e.value); 	  //Temperatura inicial
+	var Tf;											  	 // Temperatura final
+	var ui = document.Temperatura.UI.value;   	 		//  unidad inicial
+	var uf = document.Temperatura.UF.value;  		   //   unidad final
+	if (ui == "c") {
+		if (uf == "k"){Tf=(Ti+273.15)} 
+		if (uf == "f"){Tf=(((9*Ti)/5)+32)}
+		if (uf == "r"){Tf=(Ti/1.25)}
+		if (uf == "c"){Tf=Ti} 
+	};
+	if (ui == "f") {
+		if (uf == "c"){Tf=((5*(Ti-32))/9)}
+		if (uf == "k"){Tf=((Ti+459.67)/1.8)}
+		if (uf == "r"){Tf=(((5*(Ti-32))/9)/1.25)}
+		if (uf == "f"){Tf=Ti}
+	};
+	if (ui == "k") {
+		if (uf == "c"){Tf=(Ti-273.15)}
+		if (uf == "f"){Tf=((1.8*Ti)-459.67)}
+		if (uf == "r"){Tf=(Ti/1.25)-273.15}
+		if (uf == "k"){Tf=Ti}
+	};
+	if (ui == "r") {
+		if (uf == "c"){Tf=(Ti*1.25)}
+		if (uf == "f"){Tf=(((9*(Ti*1.25))/5)+32)}
+		if (uf == "k"){Tf=((Ti+273.15)*1.25)}
+		if (uf == "r"){Tf=Ti}
+	};
+
+	 if (uf == -1){Tf="Seleciona una unidad"};
+	document.Temperatura.s.value=Tf;
+	if(document.Temperatura.s.value=="NaN"){document.Temperatura.s.value="inserta un numero valido";}
+};
+function volumen() {
+	var li = parseFloat(document.Volumen.e.value); 	    //Volumen inicial
+	var lf;											   // Volumen final
+	var ui = parseFloat(document.Volumen.UI.value);   //  unidad inicial
+	var uf = parseFloat(document.Volumen.UF.value);  //   unidad final
+	lf=(li*ui)/uf;
+	if (uf == -1){lf="Seleciona una unidad"};
+	document.Volumen.s.value=lf;
+	if(document.Volumen.s.value=="NaN"){document.Volumen.s.value="inserta un numero valido";}
+};
+function superficie() {
+	var li = parseFloat(document.Superficie.e.value); 	   //Superficie inicial
+	var lf;											 	  // Superficie final
+	var ui = parseFloat(document.Superficie.UI.value);   //  unidad inicial
+	var uf = parseFloat(document.Superficie.UF.value);  //   unidad final
+	lf=(li*ui)/uf;
+	if (uf == -1){lf="Seleciona una unidad"};
+	document.Superficie.s.value=lf;
+	if(document.Superficie.s.value=="NaN"){document.Superficie.s.value="inserta un numero valido";}
+};
+function presion() {
+	var li = parseFloat(document.Presion.e.value); 	    //Presión inicial
+	var lf;											   // Presión final
+	var ui = parseFloat(document.Presion.UI.value);   //  unidad inicial
+	var uf = parseFloat(document.Presion.UF.value);  //   unidad final
+	lf=(li*ui)/uf;
+	if (uf == -1){lf="Seleciona una unidad"};
+	document.Presion.s.value=lf;
+	if(document.Presion.s.value=="NaN"){document.Presion.s.value="inserta un numero valido";}
+};
+</script>
+</head>
+<body>
+<div name="magnitudes fundamentales"><h2 class="titulo">Magnitudes fundamentales:</h2>	
+<div id="accordion" class="ui-accordion ui-widget ui-helper-reset ui-accordion-icons" role="tablist">
+
+<!LONGITUD-->	
+<h3 class="tab" role="tab" aria-expanded="true" aria-selected="true" tabindex="0"><span class="ui-icon ui-icon-triangle-1-s"></span><a href="#Longitud">Longitud:</a></h3>
+<div role="tabpanel" style="padding-top: 11px; padding-bottom: 11px; display: block; overflow-x: auto; overflow-y: auto; "><center>
+<form name="Longitud">
+<hr>
+<input name="e" type="text" value=" " onchange="longitud();" onkeyup="longitud();"class="pantalla"/>
+<SELECT onchange="longitud()" name="UI">
+<option value="1000000000000000000000000 " > Ym (yottametros) </option>
+<option value="1000000000000000000000 " > Zm (zettametros) </option>
+<option value="1000000000000000000 " > Em (exametros) </option>
+<option value="1000000000000000"> Pm (petametros) </option>
+<option value="1000000000000"> Tm (terametros)
+<option value="1000000000"> Gm (gigametros) </option>
+<option value="1000000"> Mm (megametros) </option>
+<option value="1000"> Km (kilometros) </option>
+<option value="100"> hm (hectometros) </option>
+<option value="10"> dam (decametros) </option>
+<option selected value="1"> m (metros) </option>
+<option value="0.1"> dm (decimetros) </option>
+<option value="0.01"> cm (centimetros) </option>
+<option value="0.001"> mm (milimetros) </option>
+<option value="0.000001"> &mu;m (micrometros) </option>
+<option value="0.000000001"> nm (nanometros) </option>
+<option value="0.0000000001"> Å (angstroms) </option>
+<option value="0.000000000001"> pm (picometros) </option>
+<option value="0.000000000000001"> fm (femtometros) </option>
+<option value="0.000000000000000001"> am (attometros) </option>
+<option value="0.000000000000000000001"> zm (zept&oacute;metros) </option>
+<option value="0.000000000000000000000001"> ym (yoct&oacute;metros) </option>
+<option disabled="disabled">&nbsp;</option>
+<option value="4828.032"> Leguas </option>
+<option value="1609.344"> Millas </option>
+<option value="201.168"> Furlong (Estadios) </option>
+<option value="20.1168"> Cadenas </option>
+<option value="5.0292"> Rod (varas) </option>
+<option value="0.9144"> Yardas </option>
+<option value="0.3048"> Pies </option>
+<option value="0.0254"> Pulgadas </option>
+<option value="0.0000254"> mil </option>
+<option disabled="disabled">&nbsp;</option>
+<option value="149597870000"> ua (unidad astronomica) </option>
+<option value="9460730472580800"> A&ntilde;os luz </option>
+<option value="30857000000000000"> P&aacute;rsec </option>
+</SELECT> a <input name="s" type="text" value="" size=" " class="pantalla"/>
+<SELECT name="UF">
+<option selected value="-1">Selecionar:</option>
+<option value="1000000000000000000000000 " > Ym (yottametros) </option>
+<option value="1000000000000000000000 " > Zm (zettametros) </option>
+<option value="1000000000000000000 " > Em (exametros) </option>
+<option value="1000000000000000"> Pm (petametros) </option>
+<option value="1000000000000"> Tm (terametros)
+<option value="1000000000"> Gm (gigametros) </option>
+<option value="1000000"> Mm (megametros) </option>
+<option value="1000"> Km (kilometros) </option>
+<option value="100"> hm (hectometros) </option>
+<option value="10"> dam (decametros) </option>
+<option value="1"> m (metros) </option>
+<option value="0.1"> dm (decimetros) </option>
+<option value="0.01"> cm (centimetros) </option>
+<option value="0.001"> mm (milimetros) </option>
+<option value="0.000001"> &mu;m (micrometros) </option>
+<option value="0.000000001"> nm (nanometros) </option>
+<option value="0.0000000001"> Å (angstroms) </option>
+<option value="0.000000000001"> pm (picometros) </option>
+<option value="0.000000000000001"> fm (femtometros) </option>
+<option value="0.000000000000000001"> am (attometros) </option>
+<option value="0.000000000000000000001"> zm (zept&oacute;metros) </option>
+<option value="0.000000000000000000000001"> ym (yoct&oacute;metros) </option>
+<option disabled="disabled">&nbsp;</option>
+<option value="4828.032"> Leguas </option>
+<option value="1609.344"> Millas </option>
+<option value="201.168"> Furlong (Estadios) </option>
+<option value="20.1168"> Cadenas </option>
+<option value="5.0292"> Rod (varas) </option>
+<option value="0.9144"> Yardas </option>
+<option value="0.3048"> Pies </option>
+<option value="0.0254"> Pulgadas </option>
+<option value="0.0000254"> mil </option>
+<option disabled="disabled">&nbsp;</option>
+<option value="149597870000"> ua (unidad astronomica) </option>
+<option value="9460730472580800"> A&ntilde;os luz </option>
+<option value="30857000000000000"> P&aacute;rsec </option>
+</SELECT>
+<input class="boton" type="button" value="Cambiar" onClick="longitud()">
+</form></center></div>
+
+<!MASA-->
+<h3 class="tab" role="tab" aria-expanded="true" aria-selected="true" tabindex="0"><span class="ui-icon ui-icon-triangle-1-s"></span><a href="#Masa">Masa:</a></h3>
+<div role="tabpanel" style="padding-top: 11px; padding-bottom: 11px; display: block; overflow-x: auto; overflow-y: auto; "><center>
+<form name="Masa">
+<hr>
+<input name="e" type="text" value="" onchange="masa();" onkeyup="masa();"class="pantalla"/>
+<SELECT name="UI">
+<option value="1000000000000000000000000 " > Yg (yottagramos) </option>
+<option value="1000000000000000000000 " > Zg (zettagramos) </option>
+<option value="1000000000000000000 " > Eg (exagramos) </option>
+<option value="1000000000000000"> Pg (petagramos) </option>
+<option value="1000000000000"> Tg (teragramos)
+<option value="1000000000"> Gg (gigagramos) </option>
+<option value="1000000"> Mg (megagramos) t (Tonelada) </option>
+<option value="100000"> q (Quintal) </option>
+<option value="10000"> mag (Miriagramo) </option>
+<option selected value="1000"> Kg (kilogramos) </option>
+<option value="100"> hg (hectogramos) </option>
+<option value="10"> dag (decagramos) </option>
+<option value="1"> g (gramos) </option>
+<option value="0.1"> dg (decigramos) </option>
+<option value="0.01"> cg (centigramos) </option>
+<option value="0.001"> mg (miligramos) </option>
+<option value="0.000001"> &mu;g (microgramos) </option>
+<option value="0.000000001"> ng (nanogramos) </option>
+<option value="0.000000000001"> pg (picogramos) </option>
+<option value="0.000000000000001"> fg (femtogramos) </option>
+<option value="0.000000000000000001"> ag (attogramos) </option>
+<option value="0.000000000000000000001"> zg (zept&oacute;gramos) </option>
+<option value="0.000000000000000000000001"> yg (yoct&oacute;gramos) </option>
+<option disabled="disabled">&nbsp;</option>
+<option value="11.5002325000"> @ (Arroba castellana) </option>
+<option value="0.06479891"> gr (grain / grano) </option>
+<option value="0.05"> Grano m&eacute;trico </option>
+<option value="3.5944"> dracma medicinal </option>
+<option value="3.8879346"> dracma farmac&eacute;utica (Dram Apothecaryl) </option>
+<option value="1.7718451953125"> dracma avoirdupois </option>
+<option value="28.7558"> onza castellana </option>
+<option value="31.1034768">  onza farmac&eacute;utica o troy </option>
+<option value="28.349523125"> Oz (onza avoirdupois) </option>
+<option value="453.59237"> lb (Libra) </option>
+
+</SELECT> a <input name="s" type="text" value="" size=" " class="pantalla"/>
+<SELECT name="UF">
+<option selected value="-1">Selecionar:</option>
+<option value="1000000000000000000000000 " > Yg (yottagramos) </option>
+<option value="1000000000000000000000 " > Zg (zettagramos) </option>
+<option value="1000000000000000000 " > Eg (exagramos) </option>
+<option value="1000000000000000"> Pg (petagramos) </option>
+<option value="1000000000000"> Tg (teragramos)
+<option value="1000000000"> Gg (gigagramos) </option>
+<option value="1000000"> Mg (megagramos) t (Tonelada) </option>
+<option value="100000"> q (Quintal) </option>
+<option value="10000"> mag (Miriagramo) </option>
+<option value="1000"> Kg (kilogramos) </option>
+<option value="100"> hg (hectogramos) </option>
+<option value="10"> dag (decagramos) </option>
+<option value="1"> g (gramos) </option>
+<option value="0.1"> dg (decigramos) </option>
+<option value="0.01"> cg (centigramos) </option>
+<option value="0.001"> mg (miligramos) </option>
+<option value="0.000001"> &mu;g (microgramos) </option>
+<option value="0.000000001"> ng (nanogramos) </option>
+<option value="0.000000000001"> pg (picogramos) </option>
+<option value="0.000000000000001"> fg (femtogramos) </option>
+<option value="0.000000000000000001"> ag (attogramos) </option>
+<option value="0.000000000000000000001"> zg (zept&oacute;gramos) </option>
+<option value="0.000000000000000000000001"> yg (yoct&oacute;gramos) </option>
+<option disabled="disabled">&nbsp;</option>
+<option value="11.5002325*1000"> @ (Arroba castellana) </option>
+<option value="0.06479891"> gr (grain / grano) </option>
+<option value="0.05"> Grano m&eacute;trico </option>
+<option value="3.5944"> dracma medicinal </option>
+<option value="3.8879346"> dracma farmac&eacute;utica (Dram Apothecaryl) </option>
+<option value="1.7718451953125"> dracma avoirdupois </option>
+<option value="28.7558"> onza castellana </option>
+<option value="31.1034768">  onza farmac&eacute;utica o troy </option>
+<option value="28.349523125"> Oz (onza avoirdupois) </option>
+<option value="453.59237"> lb (Libra) </option>
+
+</SELECT>
+<input class="boton" type="button" value="Cambiar" onClick="masa()">
+</form></center></div>
+
+<!TIEMPO-->
+<h3 class="tab" role="tab" aria-expanded="true" aria-selected="true" tabindex="0"><span class="ui-icon ui-icon-triangle-1-s"></span><a href="#Tiempo">Tiempo:</a></h3>
+<div role="tabpanel" style="padding-top: 11px; padding-bottom: 11px; display: block; overflow-x: auto; overflow-y: auto; "><center>
+<form name="Tiempo"><hr>
+<input name="e" type="text" value="" onchange="tiempo();" onkeyup="tiempo();"class="pantalla"/>
+<SELECT name="UI">
+<option value="60"> Minutos </option>
+<option value="3600"> Horas </option>
+<option value="86400"> D&iacute;a solar medio </option>
+<option value="604800"> Semanas </option>
+<option value="2678400"> Meses </option>
+<option value="31536000"> A&ntilde;os </option>
+<option value="3155760000"> Siglos </option>
+<option value="315569520000"> Milenios </option>
+<option disabled="disabled">&nbsp;</option>
+<option value="1000000000000000000000000 " > Ys (yottasegundos) </option>
+<option value="1000000000000000000000 " > Zs (zettasegundos) </option>
+<option value="1000000000000000000 " > E (exasegundos) </option>
+<option value="1000000000000000"> Ps (petasegundos) </option>
+<option value="1000000000000"> Ts (terasegundos)
+<option value="1000000000"> Gs (gigasegundos) </option>
+<option value="1000000"> Ms (megasegundos) </option>
+<option value="1000"> Kg (kilosegundos) </option>
+<option value="100"> hs (hectosegundos) </option>
+<option value="10"> das (decasegundos) </option>
+<option selected value="1"> s (segundos) </option>
+<option value="0.1"> ds (decisegundos) </option>
+<option value="0.01"> cs (centisegundos) </option>
+<option value="0.001"> ms (milisegundos) </option>
+<option value="0.000001"> &mu;s (microsegundos) </option>
+<option value="0.000000001"> ns (nanosegundos) </option>
+<option value="0.000000000001"> ps (picosegundos) </option>
+<option value="0.000000000000001"> fs (femtosegundos) </option>
+<option value="0.000000000000000001"> as (attosegundos) </option>
+<option value="0.000000000000000000001"> zs (zept&oacute;segundos) </option>
+<option value="0.000000000000000000000001"> ys (yoct&oacute;segundos) </option>
+</SELECT> a <input name="s" type="text" value="" size=" " class="pantalla"/>
+<SELECT name="UF">
+<option selected value="-1">Selecionar:</option>
+<option value="60"> Minutos </option>
+<option value="3600"> Horas </option>
+<option value="86400"> D&iacute;a solar medio </option>
+<option value="604800"> Semanas </option>
+<option value="2678400"> Meses </option>
+<option value="31536000"> A&ntilde;os </option>
+<option value="3155760000"> Siglos </option>
+<option value="315569520000"> Milenios </option>
+<option disabled="disabled">&nbsp;</option>
+<option value="1000000000000000000000000 " > Ys (yottasegundos) </option>
+<option value="1000000000000000000000 " > Zs (zettasegundos) </option>
+<option value="1000000000000000000 " > E (exasegundos) </option>
+<option value="1000000000000000"> Ps (petasegundos) </option>
+<option value="1000000000000"> Ts (terasegundos)
+<option value="1000000000"> Gs (gigasegundos) </option>
+<option value="1000000"> Ms (megasegundos) </option>
+<option value="1000"> Kg (kilosegundos) </option>
+<option value="100"> hs (hectosegundos) </option>
+<option value="10"> das (decasegundos) </option>
+<option value="1"> s (segundos) </option>
+<option value="0.1"> ds (decisegundos) </option>
+<option value="0.01"> cs (centisegundos) </option>
+<option value="0.001"> ms (milisegundos) </option>
+<option value="0.000001"> &mu;s (microsegundos) </option>
+<option value="0.000000001"> ns (nanosegundos) </option>
+<option value="0.000000000001"> ps (picosegundos) </option>
+<option value="0.000000000000001"> fs (femtosegundos) </option>
+<option value="0.000000000000000001"> as (attosegundos) </option>
+<option value="0.000000000000000000001"> zs (zept&oacute;segundos) </option>
+<option value="0.000000000000000000000001"> ys (yoct&oacute;segundos) </option>
+</SELECT>
+<input class="boton" type="button" value="Cambiar" onClick="tiempo()">
+</form></center>
+</div>
+
+<!TEMPERATURA-->
+<h3 class="tab" role="tab" aria-expanded="true" aria-selected="true" tabindex="0"><a href="#Temperatura">Temperatura:</a></h3>
+<div role="tabpanel" style="padding-top: 11px; padding-bottom: 11px; display: block; overflow-x: auto; overflow-y: auto; "><center>
+<form name="Temperatura"><hr>
+<input name="e" type="text" value="" onchange="temperatura();" onkeyup="temperatura();"class="pantalla"/>
+<SELECT name="UI">
+<option selected value="k">K (Kelvin) </option>
+<option value="c">&deg;C (Grados centigrados) </option>
+<option value="f">&deg;F (Grados Farenheit) </option>
+<option value="r">&deg;Re (Grados R&eacute;aumur </option>
+</SELECT> a <input name="s" type="text" value="" size=" " class="pantalla"/>
+<SELECT name="UF">
+<option selected value="-1">Selecionar:</option>	
+<option value="c">&deg;C (Grados centigrados) </option>
+<option value="k">K (Kelvin) </option>
+<option value="f">&deg;F (Grados Farenheit) </option>
+<option value="r">&deg;Re (Grados R&eacute;aumur) </option>
+</SELECT>
+<input class="boton" type="button" value="Cambiar" onClick="temperatura()">
+</form></center>
+</div>
+
+
+</div>
+</div> <!Magnitudes Fundamentales-->
+
+<div name="magnitudes derivadas"><h2 class="titulo">Magnitudes derivadas:</h2>	
+<div id="accordion2" class="ui-accordion ui-widget ui-helper-reset ui-accordion-icons" role="tablist">
+
+<!VOLUMEN-->
+<h3 class="tab" role="tab" aria-expanded="true" aria-selected="true" tabindex="0"><span class="ui-icon ui-icon-triangle-1-s"></span><a href="#Volumen">Volumen:</a></h3>
+<div role="tabpanel" style="padding-top: 11px; padding-bottom: 11px; display: block; overflow-x: auto; overflow-y: auto; "><center>
+<form name="Volumen"><hr>
+<input name="e" type="text" value="" onchange="volumen();" onkeyup="volumen();"class="pantalla"/>
+<SELECT name="UI">
+<option value="1000000000000000000000000 " > YL (yottalitros) </option>
+<option value="1000000000000000000000 " > ZL (zettalitros) </option>
+<option value="1000000000000000000 " > EL (exalitros) </option>
+<option value="1000000000000000"> PL (petalitros) </option>
+<option value="1000000000000"> TL (teralitros)
+<option value="1000000000"> GL (gigalitros) </option>
+<option value="1000000"> ML (megalitros) </option>
+<option value="1000"> KL (kilolitros) </option>
+<option value="100"> hL (hectolitros) </option>
+<option value="10"> daL (decalitros) </option>
+<option selected value="1"> L (litros) </option>
+<option value="0.1"> dL (decilitros) </option>
+<option value="0.01"> cL (centilitros) </option>
+<option value="0.001"> mL (mililitros) </option>
+<option value="0.000001"> &mu;L (microlitros) </option>
+<option value="0.000000001"> nL (nanolitros) </option>
+<option value="0.000000000001"> pL (picolitros) </option>
+<option value="0.000000000000001"> fL (femtolitros) </option>
+<option value="0.000000000000000001"> aL (attolitros) </option>
+<option value="0.000000000000000000001"> zL (zept&oacute;litros) </option>
+<option value="0.000000000000000000000001"> yL (yoct&oacute;litros) </option>
+<option disabled="disabled">&nbsp;</option>
+<option value="0.000000000000000000000000000000001" > Ym&sup3; (yottametros cubicos) </option>
+<option value="0.000000000000000000000000000001" > Zm&sup3; (zettametros cubicos) </option>
+<option value="0.000000000000000000000000001" > Em&sup3; (exametros cubicos) </option>
+<option value="0.000000000000000000000001"> Pm&sup3; (petametros cubicos) </option>
+<option value="0.000000000000000000001"> Tm&sup3; (terametros cubicos)
+<option value="0.000000000000000001"> Gm&sup3; (gigametros cubicos) </option>
+<option value="0.000000000000001"> Mm&sup3; (megametros cubicos) </option>
+<option value="0.000000000001"> Km&sup3; (kilometros cubicos) </option>
+<option value="0.000000001"> hm&sup3; (hectometros cubicos) </option>
+<option value="0.000001"> dam&sup3; (decametros cubicos) </option>
+<option value="0.001"> m&sup3; (metros cubicos) </option>
+<option value="1"> dm&sup3; (decimetros cubicos) </option>
+<option value="1000"> cm&sup3; (centimetros cubicos) </option>
+<option value="1000000"> mm&sup3; (milimetros cubicos) </option>
+<option value="1000000000"> &mu;m&sup3; (micrometros cubicos) </option>
+<option value="1000000000000"> nm&sup3; (nanometros cubicos) </option>
+<option value="1000000000000000"> pm&sup3; (picometros cubicos) </option>
+<option value="1000000000000000000"> fm&sup3; (femtometros cubicos) </option>
+<option value="1000000000000000000000"> am&sup3; (attometros cubicos) </option>
+<option value="1000000000000000000000000"> zm&sup3; (zept&oacute;metros cubicos) </option>
+<option value="1000000000000000000000000000"> ym&sup3; (yoct&oacute;metros cubicos) </option>
+</SELECT> a <input name="s" type="text" value="" size=" " class="pantalla"/>
+<SELECT name="UF">
+<option selected value="-1">Selecionar:</option>
+<option value="1000000000000000000000000 " > YL (yottalitros) </option>
+<option value="1000000000000000000000 " > ZL (zettalitros) </option>
+<option value="1000000000000000000 " > EL (exalitros) </option>
+<option value="1000000000000000"> PL (petalitros) </option>
+<option value="1000000000000"> TL (teralitros)
+<option value="1000000000"> GL (gigalitros) </option>
+<option value="1000000"> ML (megalitros) </option>
+<option value="1000"> KL (kilolitros) </option>
+<option value="100"> hL (hectolitros) </option>
+<option value="10"> daL (decalitros) </option>
+<option value="1"> L (litros) </option>
+<option value="0.1"> dL (decilitros) </option>
+<option value="0.01"> cL (centilitros) </option>
+<option value="0.001"> mL (mililitros) </option>
+<option value="0.000001"> &mu;L (microlitros) </option>
+<option value="0.000000001"> nL (nanolitros) </option>
+<option value="0.000000000001"> pL (picolitros) </option>
+<option value="0.000000000000001"> fL (femtolitros) </option>
+<option value="0.000000000000000001"> aL (attolitros) </option>
+<option value="0.000000000000000000001"> zL (zept&oacute;litros) </option>
+<option value="0.000000000000000000000001"> yL (yoct&oacute;litros) </option>
+<option disabled="disabled">&nbsp;</option>
+<option value="" > Ym&sup3; (yottametros cubicos) </option>
+<option value="1000000000000000000000000000000" > Zm&sup3; (zettametros cubicos) </option>
+<option value="1000000000000000000000000000" > Em&sup3; (exametros cubicos) </option>
+<option value="1000000000000000000000000"> Pm&sup3; (petametros cubicos) </option>
+<option value="1000000000000000000000"> Tm&sup3; (terametros cubicos)
+<option value="1000000000000000000"> Gm&sup3; (gigametros cubicos) </option>
+<option value="1000000000000000"> Mm&sup3; (megametros cubicos) </option>
+<option value="1000000000000"> Km&sup3; (kilometros cubicos) </option>
+<option value="1000000000"> hm&sup3; (hectometros cubicos) </option>
+<option value="1000000"> dam&sup3; (decametros cubicos) </option>
+<option value="1000"> m&sup3; (metros cubicos) </option>
+<option value="1"> dm&sup3; (decimetros cubicos) </option>
+<option value="0.001"> cm&sup3; (centimetros cubicos) </option>
+<option value="0.000001"> mm&sup3; (milimetros cubicos) </option>
+<option value="0.000000001"> &mu;m&sup3; (micrometros cubicos) </option>
+<option value="0.000000000001"> nm&sup3; (nanometros cubicos) </option>
+<option value="0.000000000000001"> pm&sup3; (picometros cubicos) </option>
+<option value="0.000000000000000001"> fm&sup3; (femtometros cubicos) </option>
+<option value="0.000000000000000000001"> am&sup3; (attometros cubicos) </option>
+<option value="0.000000000000000000000001"> zm&sup3; (zept&oacute;metros cubicos) </option>
+<option value="0.000000000000000000000000001"> ym&sup3; (yoct&oacute;metros cubicos) </option>
+</SELECT>
+<input class="boton" type="button" value="Cambiar" onClick="volumen()">
+</form></center>
+</div>
+	
+	
+	
+	
+	
+<!SUPERFICIE-->
+<h3 class="tab" role="tab" aria-expanded="true" aria-selected="true" tabindex="0"><span class="ui-icon ui-icon-triangle-1-s"></span><a href="#Superficie">Superficie:</a></h3>
+<div role="tabpanel" style="padding-top: 11px; padding-bottom: 11px; display: block; overflow-x: auto; overflow-y: auto; "><center>
+<form name="Superficie"><hr>
+<input name="e" type="text" value="" onchange="superficie();" onkeyup="superficie();"class="pantalla"/>
+<SELECT name="UI">
+
+<option value="0.00000000000000000001" > Ym&sup2; (yottametros cuadrados) </option>
+<option value="0.000000000000000001" > Zm&sup2; (zettametros cuadrados) </option>
+<option value="0.0000000000000001" > Em&sup2; (exametros cuadrados) </option>
+<option value="0.00000000000001"> Pm&sup2; (petametros cuadrados) </option>
+<option value="0.000000000001"> Tm&sup2; (terametros cuadrados)
+<option value="0.0000000001"> Gm&sup2; (gigametros cuadradoss) </option>
+<option value="0.00000001"> Mm&sup2; (megametros cuadrados) </option>
+<option value="0.000001"> Km&sup2; (kilometros cuadrados) </option>
+<option value="0.0001"> hm&sup2; (hectometros cuadrados &oacute; hect&aacute;reas) </option>
+<option value="0.01"> dam&sup2; (decametros cuadrados &oacute; &aacute;reas)  </option>
+<option selected value="1"> m&sup2; (metros cuadrados) </option>
+<option value="100"> dm&sup2; (decimetros cuadrados) </option>
+<option value="10000"> cm&sup2; (centimetros cuadrados) </option>
+<option value="1000000"> mm&sup2; (milimetros cuadrados) </option>
+<option value="100000000"> &mu;m&sup2; (micrometros cuadrados) </option>
+<option value="10000000000"> nm&sup2; (nanometros cuadrados) </option>
+<option value="1000000000000"> pm&sup2; (picometros cuadrados) </option>
+<option value="100000000000000"> fm&sup2; (femtometros cuadrados) </option>
+<option value="10000000000000000"> am&sup2; (attometros cuadrados) </option>
+<option value="1000000000000000000"> zm&sup2; (zept&oacute;metros cuadrados) </option>
+<option value="100000000000000000000"> ym&sup2; (yoct&oacute;metros cuadrados) </option>
+<option disabled="disabled">&nbsp;</option>
+<option value="0.00024710538146717"> ac (acres) </option>
+<option value="1.1959900463011"> yd&sup2; (yardas cuadradas) </option>
+<option value="10.76391041671"> ft&sup2; (pies cuadrados) </option>
+<option value="1550.0031000062"> in&sup2; (pulgadas cuadradas) </option>
+</SELECT> a <input name="s" type="text" value="" size=" " class="pantalla"/>
+<SELECT name="UF">
+<option selected value="-1">Selecionar:</option>
+<option value="0.00000000000000000001" > Ym&sup2; (yottametros cuadrados) </option>
+<option value="0.000000000000000001" > Zm&sup2; (zettametros cuadrados) </option>
+<option value="0.0000000000000001" > Em&sup2; (exametros cuadrados) </option>
+<option value="0.00000000000001"> Pm&sup2; (petametros cuadrados) </option>
+<option value="0.000000000001"> Tm&sup2; (terametros cuadrados)
+<option value="0.0000000001"> Gm&sup2; (gigametros cuadradoss) </option>
+<option value="0.00000001"> Mm&sup2; (megametros cuadrados) </option>
+<option value="0.000001"> Km&sup2; (kilometros cuadrados) </option>
+<option value="0.0001"> hm&sup2; (hectometros cuadrados &oacute; hect&aacute;reas) </option>
+<option value="0.01"> dam&sup2; (decametros cuadrados &oacute; &aacute;reas)  </option>
+<option value="1"> m&sup2; (metros cuadrados) </option>
+<option value="100"> dm&sup2; (decimetros cuadrados) </option>
+<option value="10000"> cm&sup2; (centimetros cuadrados) </option>
+<option value="1000000"> mm&sup2; (milimetros cuadrados) </option>
+<option value="100000000"> &mu;m&sup2; (micrometros cuadrados) </option>
+<option value="10000000000"> nm&sup2; (nanometros cuadrados) </option>
+<option value="1000000000000"> pm&sup2; (picometros cuadrados) </option>
+<option value="100000000000000"> fm&sup2; (femtometros cuadrados) </option>
+<option value="10000000000000000"> am&sup2; (attometros cuadrados) </option>
+<option value="1000000000000000000"> zm&sup2; (zept&oacute;metros cuadrados) </option>
+<option value="100000000000000000000"> ym&sup2; (yoct&oacute;metros cuadrados) </option>
+<option disabled="disabled">&nbsp;</option>
+<option value="0.00024710538146717"> ac (acres) </option>
+<option value="1.1959900463011"> yd&sup2; (yardas cuadradas) </option>
+<option value="10.76391041671"> ft&sup2; (pies cuadrados) </option>
+<option value="1550.0031000062"> in&sup2; (pulgadas cuadradas) </option>
+</SELECT>
+<input class="boton" type="button" value="Cambiar" onClick="superficie()">
+</form></center>
+</div>	
+	
+
+
+
+
+<!DENSIDAD-->
+<h3 class="tab" role="tab" aria-expanded="true" aria-selected="true" tabindex="0"><a href="#Densidad">Densidad:</a></h3>
+<div role="tabpanel" style="padding-top: 11px; padding-bottom: 11px; display: block; overflow-x: auto; overflow-y: auto; "><center>
+<form name="Densidad"><hr>
+<input name="e" type="text" value="" onchange="densidad();" onkeyup="densidad();"class="pantalla"/>
+<SELECT name="UI">
+<option disabled="disabled">&nbsp;</option>
+<option value=""> Kg/dm&sup3; Kg/L (Kilogramos/decimetros cubicos &oacute; Kilogramos/Litros)  </option>
+<option selected value="1"> Kg/m&sup3; (Kilogramos/metros cubicos) </option>
+<option value=""> g/cm&sup3; (gramos/centimetros cubicos) </option>
+<option value=""> g/mL g/cm&sup3; (gramos/mililitros gramos/centimetros cubicos) </option>
+</SELECT> a <input name="s" type="text" value="" size=" " class="pantalla"/>
+<SELECT name="UF">
+<option selected value="-1">Selecionar:</option>
+
+</SELECT>
+<input class="boton" type="button" value="Cambiar" onClick="densidad()">
+</form></center>
+</div>	
+
+
+
+
+
+
+<!PRESION-->
+<h3 class="tab" role="tab" aria-expanded="true" aria-selected="true" tabindex="0"><span class="ui-icon ui-icon-triangle-1-s"></span><a href="#Presion">Presi&oacute;n:</a></h3>
+<div role="tabpanel" style="padding-top: 11px; padding-bottom: 11px; display: block; overflow-x: auto; overflow-y: auto; "><center>
+<form name="Presion"><hr>
+<input name="e" type="text" value="" onchange="presion();" onkeyup="presion();"class="pantalla"/>
+<SELECT name="UI">
+<option selected value="1">Pa (N/m&sup2;) (Pascales) </option>
+<option value="0.00001"> bar (Baras) </option>
+<option value="0.000001"> N/mm&sup2; (Newtons/milimetros cuadrados) </option>
+<option value="0.102"> Kp/m&sup2; (Kilopondios/metros cuadrados) </option>
+<option value="0.0000102"> Kp/cm&sup2; (Kilopondios/centimetros cuadrados) </option>
+<option value="0.00000987"> atm (atmosferas) </option>
+<option value="0.0075"> torr mmHg (Milimetros de Mercurio) </option>
+</SELECT> a <input name="s" type="text" value="" size=" " class="pantalla"/>
+<SELECT name="UF">
+<option selected value="-1">Selecionar:</option>
+<option value="1">Pa (N/m&sup2;) (Pascales) </option>
+<option value="0.00001"> bar (Baras) </option>
+<option value="0.000001"> N/mm&sup2; (Newtons/milimetros cuadrados) </option>
+<option value="0.102"> Kp/m&sup2; (Kilopondios/metros cuadrados) </option>
+<option value="0.0000102"> Kp/cm&sup2; (Kilopondios/centimetros cuadrados) </option>
+<option value="0.00000987"> atm (atmosferas) </option>
+<option value="0.0075"> torr mmHg (Milimetros de Mercurio) </option>
+</SELECT>
+<input class="boton" type="button" value="Cambiar" onClick="presion()">
+</form></center>
+</div>	
+
+
+
+<!Fuerza-->
+<h3 class="tab" role="tab" aria-expanded="true" aria-selected="true" tabindex="0"><span></span><a href="#Fuerza">Fuerza:</a></h3>
+<div role="tabpanel" style="padding-top: 11px; padding-bottom: 11px; display: block; overflow-x: auto; overflow-y: auto; "><center>
+<form name="Fuerza"><hr>
+<input name="e" type="text" value="" onchange="fuerza();" onkeyup="fuerza();"class="pantalla"/>
+<SELECT name="UI">
+
+<option value="0.00000000000000000001" > Ym&sup2; (yottametros cuadrados) </option>
+<option value="0.000000000000000001" > Zm&sup2; (zettametros cuadrados) </option>
+<option value="0.0000000000000001" > Em&sup2; (exametros cuadrados) </option>
+<option value="0.00000000000001"> Pm&sup2; (petametros cuadrados) </option>
+<option value="0.000000000001"> Tm&sup2; (terametros cuadrados)
+<option value="0.0000000001"> Gm&sup2; (gigametros cuadradoss) </option>
+<option value="0.00000001"> Mm&sup2; (megametros cuadrados) </option>
+<option value="0.000001"> Km&sup2; (kilometros cuadrados) </option>
+<option value="0.0001"> hm&sup2; (hectometros cuadrados &oacute; hect&aacute;reas) </option>
+<option value="0.01"> dam&sup2; (decametros cuadrados &oacute; &aacute;reas)  </option>
+<option selected value="1"> N (Newtons) </option>
+<option value="100"> dm&sup2; (decimetros cuadrados) </option>
+<option value="10000"> cm&sup2; (centimetros cuadrados) </option>
+<option value="1000000"> mm&sup2; (milimetros cuadrados) </option>
+<option value="100000000"> &mu;m&sup2; (micrometros cuadrados) </option>
+<option value="10000000000"> nm&sup2; (nanometros cuadrados) </option>
+<option value="1000000000000"> pm&sup2; (picometros cuadrados) </option>
+<option value="100000000000000"> fm&sup2; (femtometros cuadrados) </option>
+<option value="10000000000000000"> am&sup2; (attometros cuadrados) </option>
+<option value="1000000000000000000"> zm&sup2; (zept&oacute;metros cuadrados) </option>
+<option value="100000000000000000000"> ym&sup2; (yoct&oacute;metros cuadrados) </option>
+<option disabled="disabled">&nbsp;</option>
+<option value="9.80665"> Kp (Kilopondio) </option>
+<option value="100000"> dyn (dinas) </option>
+<option value="4.448222"> lbf (Libra) </option>
+</SELECT> a <input name="s" type="text" value="" size=" " class="pantalla"/>
+<SELECT name="UF">
+<option selected value="-1">Selecionar:</option>
+
+</SELECT>
+<input class="boton" type="button" value="Cambiar" onClick="fuerza()">
+</form></center>
+</div>	
+
+
+<!VELOCIDAD-->
+<h3 class="tab" role="tab" aria-expanded="true" aria-selected="true" tabindex="0"><span></span><a href="#Velocidad">Velocidad:</a></h3>
+<div role="tabpanel" style="padding-top: 11px; padding-bottom: 11px; display: block; overflow-x: auto; overflow-y: auto; "><center>
+<form name="Velocidad"><hr>
+<input name="e" type="text" value="" onchange="velocidad();" onkeyup="velocidad();"class="pantalla"/>
+<SELECT name="UI">
+
+<option value="0.00000000000000000001" > Ym/s (yottametros por segundo) </option>
+<option value="0.000000000000000001" > Zm/s (zettametros por segundo) </option>
+<option value="0.0000000000000001" > Em/s (exametros por segundo) </option>
+<option value="0.00000000000001"> Pm/s (petametros por segundo) </option>
+<option value="0.000000000001"> Tm/s (terametros por segundo)
+<option value="0.0000000001"> Gm/s (gigametros por segundo) </option>
+<option value="0.00000001"> Mm/s (megametros por segundo) </option>
+<option value="0.000001"> Km/s (kilometros por segundo) </option>
+<option value="0.0001"> hm/s (hectometros por segundo) </option>
+<option value="0.01"> dam/s (decametros por segundo)  </option>
+<option selected value="1"> m/s (metros por segundo) </option>
+<option value="100"> dm/s (decimetros por segundo) </option>
+<option value="10000"> cm/s (centimetros por segundo) </option>
+<option value="1000000"> mm/s (milimetros por segundo) </option>
+<option value="100000000"> &mu;m/s (micrometros por segundo) </option>
+<option value="10000000000"> nm/s (nanometros por segundo) </option>
+<option value="1000000000000"> pm/s (picometros por segundo) </option>
+<option value="100000000000000"> fm/s (femtometros por segundo) </option>
+<option value="10000000000000000"> am/s (attometros por segundo) </option>
+<option value="1000000000000000000"> zm/s (zept&oacute;metros por segundo) </option>
+<option value="100000000000000000000"> ym/s (yoct&oacute;metros por segundo) </option>
+<option disabled="disabled">&nbsp;</option>
+<option value=""> ft/s (pies por segundo) </option>
+<option value=""> mps (millas por segundo) </option>
+<option value="3.6"> km/h (kilometros por hora) </option>
+<option value=""> mph (millas por hora) </option>
+<option value=""> nudos </option>
+
+</SELECT> a <input name="s" type="text" value="" size=" " class="pantalla"/>
+<SELECT name="UF">
+<option selected value="-1">Selecionar:</option>
+
+</SELECT>
+<input class="boton" type="button" value="Cambiar" onClick="velocidad()">
+</form></center>
+</div>	
+
+<!ACELERACION-->
+<h3 class="tab" role="tab" aria-expanded="true" aria-selected="true" tabindex="0"><span></span><a href="#Aceleracion">Aceleraci&oacute;n:</a></h3>
+<div role="tabpanel" style="padding-top: 11px; padding-bottom: 11px; display: block; overflow-x: auto; overflow-y: auto; "><center>
+<form name="Aceleracion"><hr>
+<input name="e" type="text" value="" onchange="aceleracion();" onkeyup="aceleracion();"class="pantalla"/>
+<SELECT name="UI">
+
+<option value="0.00000000000000000001" > Ym/s&sup2; (yottametros por segundos cuadrados) </option>
+<option value="0.000000000000000001" > Zm/s&sup2; (zettametros por segundos cuadrados) </option>
+<option value="0.0000000000000001" > Em/s&sup2; (exametros por segundos cuadrados) </option>
+<option value="0.00000000000001"> Pm/s&sup2; (petametros por segundos cuadrados) </option>
+<option value="0.000000000001"> Tm/s&sup2; (terametros por segundos cuadrados)
+<option value="0.0000000001"> Gm/s&sup2; (gigametros por segundos cuadrados) </option>
+<option value="0.00000001"> Mm/s&sup2; (megametros por segundos cuadrados) </option>
+<option value="0.000001"> Km/s&sup2; (kilometros por segundos cuadrados) </option>
+<option value="0.0001"> hm/s&sup2; (hectometros por segundos cuadrados) </option>
+<option value="0.01"> dam/s&sup2; (decametros por segundos cuadrados)  </option>
+	<option selected value="1">  m/s&sup2; (metros por segundos cuadrados)  </option>
+<option value="100"> dm/s&sup2; (decimetros por segundos cuadrados) </option>
+	<option value="10000"> cm/s&sup2; (centimetros por segundos cuadrados) </option>
+<option value="1000000"> mm/s&sup2; (milimetros por segundos cuadrados) </option>
+<option value="100000000"> &mu;m/s&sup2; (micrometros por segundos cuadrados) </option>
+<option value="10000000000"> nm/s&sup2; (nanometros por segundos cuadrados) </option>
+<option value="1000000000000"> pm/s&sup2; (picometros por segundos cuadrados) </option>
+<option value="100000000000000"> fm/s&sup2; (femtometros por segundos cuadrados) </option>
+<option value="10000000000000000"> am/s&sup2; (attometros por segundos cuadrados) </option>
+<option value="1000000000000000000"> zm/s&sup2; (zept&oacute;metros por segundos cuadrados) </option>
+<option value="100000000000000000000"> ym/s&sup2; (yoct&oacute;metros por segundos cuadrados) </option>
+<option disabled="disabled">&nbsp;</option>
+<option value="0.00024710538146717"> gal </option>
+</SELECT> a <input name="s" type="text" value="" size=" " class="pantalla"/>
+<SELECT name="UF">
+<option selected value="-1">Selecionar:</option>
+
+</SELECT>
+<input class="boton" type="button" value="Cambiar" onClick="aceleracion()">
+</form></center>
+</div>	
+
+
+	
+</div>	
+</div> <!Magnitudes Derivadas-->
+</body>
+</html>

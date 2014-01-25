@@ -1,0 +1,83 @@
+<html>
+<head>
+<link rel="stylesheet" href="css/3.css" type="text/css" />
+<script type="application/javascript">
+//escribe
+function w(n){
+document.calculadora.pantalla.value=(document.calculadora.pantalla.value+n)
+}
+//borra pantalla
+function ce(v){
+document.calculadora.pantalla.value=v
+}
+// calcula seno, coseno, tangente e inversas
+function trigonometria(operacion){
+	document.calculadora.pantalla.value=eval(operacion((parseFloat(document.calculadora.pantalla.value)*Math.PI)/180))
+}
+function compr(){
+ if (document.calculadora.pantalla.value=="NaN"){document.calculadora.pantalla.value="Math ERROR";}
+}
+</script> 
+<script src="http://www.google.com/jsapi"></script>
+<script>google.load("jquery", "1.2.6")</script>
+<script src="jquery.corners.js"></script>
+<title>Calculadora</title>
+</head>
+<body onmousemove="compr()" onclick="compr()">
+<center>
+<div>
+<script>$(document).ready( function(){
+  $('.rounded').corners();
+});</script>
+<form name="calculadora" id="Fondo" class="rounded {5px}">
+<!--<INPUT type="textarea" value="" align="center" name="pantalla" onChange="calculadora.pantalla.value=eval(calculadora.pantalla.value)"> otra pantalla-->
+<textarea name="pantalla" class="pantalla rounded {5px}" onChange="calculadora.pantalla.value=eval(calculadora.pantalla.value)"></textarea>
+<table align="center" border="0" summary="">
+<tbody>
+<tr>
+<td><INPUT name="7" type="button" class="boton" onClick="w(7)" value="7" size="3"></td>
+<td><INPUT name="8" type="button" class="boton" onClick="w(8)" value="8" size="3"></td>
+<td><INPUT name="9" type="button" class="boton" onClick="w(9)" value="9" size="3"></td>
+<td><INPUT name="+" type="button" class="boton" onClick="w(&#39;+&#39;)" value=" + " size="3"></td>
+<td><INPUT name="*" type="button" class="boton" onClick="w(&#39;*&#39;)" value="X" size="3"></td>
+<td><INPUT name="%" type="button" class="boton" onClick="calculadora.pantalla.value=((calculadora.pantalla.value)/100)" value="%" size=""></td>
+<td><input name="seno2" type="button" class="boton" onClick="trigonometria(Math.sin)" value="sin" size="3"></td>
+<td><INPUT name="inversaseno" type="button" class="boton" onClick="trigonometria(Math.asin)" value="asin" size="3"></td>
+<td><INPUT name="(" type="button" class="boton" onClick="w(&#39;(&#39;)" value="(" size="3"></td>
+<td><INPUT name=")" type="button" class="boton" onClick="w(&#39;)&#39;)" value=")" size="3"></td>
+</tr>
+<tr>
+<td><INPUT name="4" type="button" class="boton" onClick="w(4)" value="4" size="3"></td>
+<td><INPUT name="5" type="button" class="boton" onClick="w(5)" value="5" size="3"></td>
+<td><INPUT name="6" type="button" class="boton" onClick="w(6)" value="6" size="3"></td>
+<td><INPUT name="-" type="button" class="boton" onClick="w(&#39;-&#39;)" value=" - " size="3"></td>
+<td><INPUT name="/" type="button" class="boton" onClick="w(&#39;/&#39;)" value="&divide;" size="3"></td>
+<td><INPUT name="pi" type="button" class="boton" onClick="w(Math.PI)" value="&pi;" size="3"></td>
+<td><INPUT name="cos" type="button" class="boton" onClick="trigonometria(Math.cos)" value="cos" size="3"></td>
+<td><INPUT name="inversacoseno" type="button" class="boton" onClick="trigonometria(Math.acos)" value="acos" size="3"></td>
+</tr>
+<tr>
+<td><INPUT name="1" type="button" class="boton" onClick="w(1)" value="1" size="3"></td>
+<td><INPUT name="2" type="button" class="boton" onClick="w(2)" value="2" size="3"></td>
+<td><INPUT name="3" type="button" class="boton" onClick="w(3)" value="3" size="3"></td>
+<td><INPUT name="pow" type="button" class="boton" onClick="calculadora.pantalla.value=Math.pow(calculadora.pantalla.value,prompt('Ingrese el exponente',''))" value=" ^ " size="3"></td>
+<td><INPUT name="sq" type="button" class="boton" onClick="calculadora.pantalla.value=Math.pow(calculadora.pantalla.value,(1/(prompt('Ingrese el indice','2'))))" value="&radic;" size="3" ></td>
+<td><input name="e" type="button" class="boton" onClick="w(Math.E)" value="e" size="3"></td>
+<td><INPUT name="tan" type="button" class="boton" onClick="trigonometria(Math.tan)" value="tan" size="3"></td>
+<td><INPUT name="inversatangente" type="button" class="boton" onClick="trigonometria(Math.atan)" value="atan" size="3"></td>
+</tr>
+<tr><td><INPUT name="0" type="button" class="boton" onClick="w(0)" value="0" size="3"></td>
+<td><INPUT name="0" type="button" class="boton" onClick="w(0),w(0)" value="00" size="3"></td>
+<td><INPUT name="." type="button" class="boton" onClick="w(&#39;.&#39;)" value="." size="3"></td>
+<td><INPUT name="=" type="button" class="boton" onClick="calculadora.pantalla.value=eval(calculadora.pantalla.value)" value="  =  " size="6"></td>
+<td><INPUT name="CE" type="button" class="boton" onClick="ce('')" value="CE" size="3"></td>
+<td><INPUT name="aureo" type="button" alt="Número Aureo" class="boton" onClick="w((1+(Math.sqrt(5)))/2)" value="&phi;" size="3"></td>
+<td><INPUT name="log" type="button" class="boton" onClick="calculadora.pantalla.value=((Math.log(calculadora.pantalla.value))/(Math.log(parseFloat(prompt('Ingrese la base','10')))))" value="log" size="3"></td>
+<td><INPUT name="x10" type="button" class="boton" onClick="w('&#101;'+prompt('Ingrese el exponente de 10',''))" value="X10" size="3"></td>
+<td><INPUT name="abs" type="button" class="boton" onClick="document.calculadora.pantalla.value=Math.abs(parseFloat(calculadora.pantalla.value))" value="abs" size="3"></td>
+
+</tr>
+</tbody>
+</table></form></div></center>
+</body>
+</html>

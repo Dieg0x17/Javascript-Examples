@@ -1,7 +1,7 @@
 Javascript-Examples
 ===================
 
-Mi código JS (jquery), CSS3 y HTML5.
+Algo de código JS (jquery), CSS3 y HTML5.
 
 
 Algunos ejemplos de código web:
